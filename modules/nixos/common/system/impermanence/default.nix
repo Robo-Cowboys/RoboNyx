@@ -5,6 +5,7 @@
 }: let
   inherit (lib) mkIf forEach;
 
+  sys = config.my.system;
   cfg = config.my.system.impermanence;
 in {
   config = mkIf cfg.enable {
@@ -32,7 +33,7 @@ in {
 
     programs.fuse.userAllowOther = true;
     environment.persistence."/persistent" = {
-      users.sincore = {
+      users."${sys.mainUser}" = {
         directories =
           [
             "Downloads"
@@ -60,6 +61,7 @@ in {
             }
             ".var/app"
           ]
+          #TODO This should be centrilized as well.
           ++ forEach ["google-chrome" "orca-slicer" "flatpak"] (x: ".cache/${x}")
           ++ forEach ["direnv" "flatpak"] (x: ".local/share/${x}")
           ++ forEach ["nyx" "NordPass" "Signal" "OrcaSlicer" "JetBrains" "google-chrome" "sops"] (x: ".config/${x}");

@@ -1,8 +1,10 @@
 {
   pkgs,
-  config,
+  osConfig,
   ...
-}: {
+}: let
+  git = osConfig.my.system.git;
+in {
   imports = [
     ./ignore.nix
   ];
@@ -12,8 +14,8 @@
       enable = true;
       package = pkgs.gitAndTools.gitFull;
 
-      userName = "use-the-fork";
-      userEmail = "sincore@gmail.com";
+      userName = git.userName;
+      userEmail = git.userEmail;
 
       extraConfig = {
         init.defaultBranch = "main";

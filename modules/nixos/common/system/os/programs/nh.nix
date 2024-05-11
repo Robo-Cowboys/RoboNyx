@@ -1,4 +1,9 @@
-_: {
+{
+  config,
+  ...
+}: let
+  sys = config.my.system;
+in {
   config = {
     # Useful package to simplify nix commands
     # https://github.com/viperML/nh
@@ -6,7 +11,7 @@ _: {
       enable = true;
       clean.enable = true;
       clean.extraArgs = "--keep-since 7d --keep 5";
-      flake = "/home/sincore/.config/nyx";
+      flake = "/home/${sys.mainUser}/.config/nyx";
     };
   };
 }

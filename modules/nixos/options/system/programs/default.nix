@@ -58,6 +58,16 @@ in {
     };
 
     git = {
+      userName = mkOption {
+        type = types.str;
+        default = "";
+        description = "The default User Name to use";
+      };
+      userEmail = mkOption {
+        type = types.str;
+        default = "";
+        description = "The default Email use";
+      };
       signingKey = mkOption {
         type = types.str;
         default = "";

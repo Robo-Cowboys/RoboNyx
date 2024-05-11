@@ -1,7 +1,10 @@
-{pkgs, ...}: let
+{pkgs, config, ...}: let
+
+  #TODO: Update this so it's pulled from the main system config.
   keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICDSw8KwWzGDDks1fHSiuJO915PDXYdgKHpj+4+6XYrW sincore@jupiter"
   ];
+  sys = config.my.system;
 in {
   config = {
     boot.initrd.network.ssh.authorizedKeys = keys;
@@ -22,7 +25,7 @@ in {
       ];
     };
 
-    users.users.sincore = {
+    users.users."${sys.mainUser}" = {
       isNormalUser = true;
       shell = pkgs.zsh;
       initialPassword = "changeme";
@@ -46,3 +49,4 @@ in {
     };
   };
 }
+
