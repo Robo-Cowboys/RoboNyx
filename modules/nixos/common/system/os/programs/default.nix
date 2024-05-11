@@ -1,14 +1,19 @@
 {
   pkgs,
+  config,
   lib,
   ...
-}: {
+}: let
+  inherit (lib) mkIf;
+
+  roles = config.my.roles;
+in {
   imports = [
     ./direnv.nix
     ./nano.nix
     ./nh.nix
   ];
-  config = {
+  config = mkIf roles.common {
     programs = {
       bash = {
         # when entering the interactive shell, set the history file to

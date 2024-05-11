@@ -7,8 +7,9 @@
   inherit (lib) mkIf getExe;
 
   cfg = config.my.system.video;
+  roles = config.my.roles;
 in {
-  config = mkIf (cfg.enable && (lib.my.isWayland config)) {
+  config = mkIf (cfg.enable && (lib.my.isWayland config) && roles.common) {
     systemd.services = {
       seatd = {
         enable = true;

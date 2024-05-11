@@ -7,11 +7,12 @@
   inherit (lib) mkIf;
 
   dev = config.my.device;
+  roles = config.my.roles;
 
   # let me play youtube videos without h.264, please and thank you
   vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
 in {
-  config = mkIf (builtins.elem dev.gpu.type ["intel" "hybrid-intel"]) {
+  config = mkIf (builtins.elem dev.gpu.type ["intel" "hybrid-intel"] && roles.common) {
     # enable the i915 kernel module
     boot.initrd.kernelModules = ["i915"];
     # better performance than the actual Intel driver

@@ -7,8 +7,9 @@
   inherit (lib) mkIf;
 
   dev = config.my.device;
+  roles = config.my.roles;
 in {
-  config = mkIf (builtins.elem dev.cpu.type ["intel" "vm-intel"]) {
+  config = mkIf ((builtins.elem dev.cpu.type ["intel" "vm-intel"]) && roles.common) {
     hardware.cpu.intel.updateMicrocode = true;
     boot = {
       kernelModules = ["kvm-intel"];

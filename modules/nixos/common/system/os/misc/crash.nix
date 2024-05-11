@@ -1,5 +1,13 @@
-_: {
-  config = {
+{
+  config,
+  lib,
+  ...
+}: let
+  inherit (lib) mkIf;
+
+  roles = config.my.roles;
+in {
+  config = mkIf roles.common {
     systemd = {
       # TODO: those tend to include sensitie information, maybe we want to disable this?
       # it could be an override in the security module

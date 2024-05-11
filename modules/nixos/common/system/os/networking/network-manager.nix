@@ -1,5 +1,13 @@
-_: {
-  config = {
+{
+  config,
+  lib,
+  ...
+}: let
+  inherit (lib) mkIf;
+
+  roles = config.my.roles;
+in {
+  config = mkIf roles.common {
     # we use networkmanager manage network devices locally
     networking.networkmanager = {
       enable = true;

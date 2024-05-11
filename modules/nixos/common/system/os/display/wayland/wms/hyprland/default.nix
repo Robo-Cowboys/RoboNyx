@@ -2,8 +2,12 @@
   lib,
   config,
   ...
-}: {
-  config = lib.mkIf (config.my.modules.graphical && config.my.usrEnv.desktop == "Hyprland") {
+}: let
+  inherit (lib) mkIf;
+
+  roles = config.my.roles;
+in {
+  config = lib.mkIf (roles.graphical && config.my.usrEnv.desktop == "Hyprland" && roles.common) {
     # Window manager
     programs.hyprland.enable = true;
     security.pam.services.swaylock = {};

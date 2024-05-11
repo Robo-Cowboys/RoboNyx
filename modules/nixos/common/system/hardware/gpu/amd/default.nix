@@ -7,8 +7,9 @@
   inherit (lib) mkIf;
 
   dev = config.my.device;
+  roles = config.my.roles;
 in {
-  config = mkIf (builtins.elem dev.gpu.type ["amd" "hybrid-amd"]) {
+  config = mkIf (builtins.elem dev.gpu.type ["amd" "hybrid-amd"] && roles.common) {
     # enable amdgpu xorg drivers in case Hyprland breaks again
     services.xserver.videoDrivers = lib.mkDefault ["modesetting" "amdgpu"];
 

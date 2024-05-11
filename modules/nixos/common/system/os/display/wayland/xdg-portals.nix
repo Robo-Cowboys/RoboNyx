@@ -4,11 +4,13 @@
   pkgs,
   ...
 }: let
+  inherit (lib) mkIf;
+
   sys = config.my.system;
   env = config.my.usrEnv;
-  inherit (lib) mkIf;
+  roles = config.my.roles;
 in {
-  config = mkIf sys.video.enable {
+  config = mkIf (sys.video.enable && roles.common) {
     xdg.portal = {
       enable = true;
 

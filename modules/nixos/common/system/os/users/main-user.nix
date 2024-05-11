@@ -1,15 +1,19 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: let
+  inherit (lib.modules) mkIf;
+
   #TODO: Update this so it's pulled from the main system config.
   keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICDSw8KwWzGDDks1fHSiuJO915PDXYdgKHpj+4+6XYrW sincore@jupiter"
   ];
   sys = config.my.system;
+  roles = config.my.roles;
 in {
-  config = {
+  config = mkIf roles.common {
     boot.initrd.network.ssh.authorizedKeys = keys;
 
     services.openssh = {

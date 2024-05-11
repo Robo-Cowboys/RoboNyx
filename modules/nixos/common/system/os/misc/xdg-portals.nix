@@ -3,10 +3,12 @@
   lib,
   ...
 }: let
-  sys = config.my.system;
   inherit (lib) mkIf;
+
+  sys = config.my.system;
+  roles = config.my.roles;
 in {
-  config = mkIf sys.video.enable {
+  config = mkIf (sys.video.enable && roles.common) {
     xdg.portal.config = {
       common = {
         "org.freedesktop.impl.portal.Secret" = [

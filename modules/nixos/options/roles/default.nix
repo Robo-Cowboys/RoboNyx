@@ -1,18 +1,23 @@
 {
   lib,
   config,
-  format,
-  virtual,
   ...
 }: let
-  inherit (lib) mkOption;
-  inherit (config.my) device;
+  inherit (lib) mkOption types;
 in {
   #TODO: Fix the descriptions here.
   options.my.roles = {
+    common = mkOption {
+      type = types.bool;
+      default = true;
+      description = ''
+        If you want to include all common settings under nixos then this should be enabled.
+      '';
+    };
+
     iso = mkOption {
       type = types.bool;
-      default = format == "iso";
+      default = false;
       description = ''
         Enables Packages specific to
       '';
@@ -52,7 +57,7 @@ in {
 
     laptop = mkOption {
       type = types.bool;
-      default = device.type == "laptop";
+      default = false;
       description = ''
         Enables laptop options.
       '';
@@ -60,7 +65,7 @@ in {
 
     microvm = mkOption {
       type = types.bool;
-      default = virtual;
+      default = false;
       description = ''
         Enables microvm options.
       '';

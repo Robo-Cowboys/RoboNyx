@@ -9,8 +9,9 @@
   inherit (lib) mkIf;
 
   cfg = config.my.system.boot.plymouth;
+  roles = config.my.roles;
 in {
-  config = mkIf cfg.enable {
+  config = mkIf (cfg.enable && roles.common) {
     # configure plymouth theme
     # <https://github.com/adi1090x/plymouth-themes>
     boot.plymouth = let

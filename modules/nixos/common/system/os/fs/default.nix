@@ -6,8 +6,9 @@
   inherit (lib) mkIf mkMerge;
 
   sys = config.my.system;
+  roles = config.my.roles;
 in {
-  config = mkMerge [
+  config = mkIf roles.common (mkMerge [
     (mkIf (builtins.elem "btrfs" sys.fs) {
       # scrub btrfs devices
       services.btrfs.autoScrub = {
@@ -48,5 +49,5 @@ in {
         supportedFilesystems = ["ntfs"];
       };
     })
-  ];
+  ]);
 }

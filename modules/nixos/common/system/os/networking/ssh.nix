@@ -1,7 +1,13 @@
-{lib, ...}: let
-  inherit (lib.modules) mkForce mkDefault;
+{
+  lib,
+  config,
+  ...
+}: let
+  inherit (lib.modules) mkIf mkForce mkDefault;
+
+  roles = config.my.roles;
 in {
-  config = {
+  config = mkIf roles.common {
     services.openssh = {
       # enable openssh
       enable = true;

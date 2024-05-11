@@ -7,8 +7,9 @@
 
   sys = config.my.system.video;
   env = config.my.usrEnv;
+  roles = config.my.roles;
 in {
-  config = mkIf (sys.enable && (lib.my.isWayland config)) {
+  config = mkIf (sys.enable && (lib.my.isWayland config) && roles.common) {
     environment.etc."greetd/environments".text = ''
       ${lib.optionalString (env.desktop == "Hyprland") "Hyprland"}
       zsh

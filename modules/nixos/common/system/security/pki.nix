@@ -1,5 +1,13 @@
-{lib, ...}: {
-  config = {
+{
+  config,
+  lib,
+  ...
+}: let
+  inherit (lib) mkIf;
+
+  roles = config.my.roles;
+in {
+  config = mkIf roles.common {
     security.pki = {
       certificates = lib.mkForce [];
       caCertificateBlacklist = [

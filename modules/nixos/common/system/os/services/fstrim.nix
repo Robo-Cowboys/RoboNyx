@@ -4,8 +4,10 @@
   ...
 }: let
   inherit (lib.modules) mkIf;
+
+  roles = config.my.roles;
 in {
-  config = {
+  config = mkIf roles.common {
     # if lvm is enabled, then tell it to issue discards
     # (this is good for SSDs and has almost no downsides on HDDs, so
     # it's a good idea to enable it unconditionally)

@@ -1,9 +1,14 @@
 {
-  config,
   pkgs,
+  config,
+  lib,
   ...
-}: {
-  config = {
+}: let
+  inherit (lib) mkIf;
+
+  roles = config.my.roles;
+in {
+  config = mkIf roles.common {
     programs.direnv = {
       enable = true;
 

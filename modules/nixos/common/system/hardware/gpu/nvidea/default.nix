@@ -17,8 +17,9 @@
 
   dev = config.my.device;
   env = config.my.usrEnv;
+  roles = config.my.roles;
 in {
-  config = mkIf (builtins.elem dev.gpu.type ["nvidia" "hybrid-nv"]) {
+  config = mkIf (builtins.elem dev.gpu.type ["nvidia" "hybrid-nv"] && roles.common) {
     # nvidia drivers are unfree software
     nixpkgs.config.allowUnfree = true;
 

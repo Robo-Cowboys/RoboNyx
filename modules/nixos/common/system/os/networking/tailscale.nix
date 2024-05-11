@@ -7,11 +7,12 @@
   inherit (lib) mkIf mkMerge optional;
   inherit (config.services) tailscale;
   cfg = config.my.system.networking.tailscale;
+  roles = config.my.roles;
 in {
   config = let
     key = "auth-key";
   in
-    mkIf cfg.enable (mkMerge [
+    mkIf (cfg.enable && roles.common) (mkMerge [
       {
         # make the tailscale command usable to users
         environment.systemPackages = [pkgs.tailscale];

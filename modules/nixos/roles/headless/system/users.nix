@@ -6,6 +6,9 @@
   ...
 }: let
   inherit (lib) mkIf;
+
+  #TODO: This needs to go back in.
+  #echo -e " █ ''${BWHITE}Configuration.:''${CO} ''${CAB}${self.rev or "\${BRED}(✘ )\${CO}\${BWHITE} Dirty"}''${CO}"
 in {
   config = mkIf config.my.roles.headless {
     users.motd = let
@@ -19,7 +22,7 @@ in {
       (
 
       # Get the common color codes from lib
-      ${toString lib.common.shellColors}
+      ${toString lib.my.common.shellColors}
 
       # Color accent to use in any primary text
       CA=$PURPLE
@@ -30,7 +33,6 @@ in {
       echo    " █"
       echo -e " █ ''${BWHITE}Hostname......:''${CAB} ${config.networking.hostName}''${CO}"
       echo -e " █ ''${BWHITE}OS Version....:''${CO} NixOS ''${CAB}${config.system.nixos.version}''${CO}"
-      echo -e " █ ''${BWHITE}Configuration.:''${CO} ''${CAB}${self.rev or "\${BRED}(✘ )\${CO}\${BWHITE} Dirty"}''${CO}"
       echo -e " █ ''${BWHITE}Uptime........:''${CO} $(${uptime} -p | ${util "cut"} -d ' ' -f2- | GREP_COLORS='mt=01;35' ${grep} --color=always '[0-9]*')"
       echo -e " █ ''${BWHITE}SSH Logins....:''${CO} There are currently ''${CAB}$(${countUsers})''${CO} users logged in on ''${CAB}$(${countSessions})''${CO} sessions"
       echo

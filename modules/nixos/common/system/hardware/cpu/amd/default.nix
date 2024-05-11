@@ -5,12 +5,14 @@
   ...
 }: let
   inherit (lib) mkIf mkMerge versionOlder versionAtLeast;
+  inherit (dev.cpu.amd) pstate zenpower;
+
   dev = config.my.device;
+  roles = config.my.roles;
 
   kver = config.boot.kernelPackages.kernel.version;
-  inherit (dev.cpu.amd) pstate zenpower;
 in {
-  config = mkIf (builtins.elem dev.cpu.type ["amd" "vm-amd"]) {
+  config = mkIf (builtins.elem dev.cpu.type ["amd" "vm-amd"] && roles.common) {
     environment.systemPackages = [pkgs.amdctl];
 
     hardware.cpu.amd.updateMicrocode = true;

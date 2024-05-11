@@ -1,7 +1,13 @@
-{config, ...}: let
+{
+  config,
+  lib,
+  ...
+}: let
+  inherit (lib) mkIf;
   sys = config.my.system;
+  roles = config.my.roles;
 in {
-  config = {
+  config = mkIf roles.common {
     # Useful package to simplify nix commands
     # https://github.com/viperML/nh
     programs.nh = {

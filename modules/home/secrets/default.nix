@@ -5,7 +5,6 @@
 }: {
   imports = [
     inputs.sops-nix.homeManagerModules.sops
-    #    (lib.my.getSharedModule "secrets")
   ];
 
   config = {

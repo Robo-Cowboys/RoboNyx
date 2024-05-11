@@ -1,12 +1,13 @@
 {
-  lib,
   config,
+  lib,
   ...
 }: let
-  # Define a condition to check against
-  condition = config.my.modules.iso;
+  inherit (lib) mkIf;
+
+  roles = config.my.roles;
 in {
-  config = lib.mkIf (!condition) {
+  config = mkIf roles.common {
     users.users.root.hashedPassword = "*"; # lock root account
   };
 }

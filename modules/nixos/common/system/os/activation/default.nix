@@ -7,8 +7,9 @@
   inherit (lib.modules) mkIf;
 
   sys = config.my.system;
+  roles = config.my.roles;
 in {
-  config = {
+  config = mkIf roles.common {
     system.activationScripts = {
       # if system declares that it wants closure diffs, then run the diff script on activation
       # this is useless if you are using nh, which does this for you in a different way

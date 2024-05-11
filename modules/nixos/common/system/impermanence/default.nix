@@ -7,8 +7,9 @@
 
   sys = config.my.system;
   cfg = config.my.system.impermanence;
+  roles = config.my.roles;
 in {
-  config = mkIf cfg.enable {
+  config = mkIf (cfg.enable && roles.common) {
     fileSystems."/etc/ssh" = {
       depends = ["/persistent"];
       neededForBoot = true;

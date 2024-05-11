@@ -7,8 +7,9 @@
   inherit (lib) mkIf;
 
   sys = config.my.system;
+  roles = config.my.roles;
 in {
-  config = mkIf sys.security.fprint.enable {
+  config = mkIf (sys.security.fprint.enable && roles.common) {
     # fingerprint login
     # doesn't work because thanks drivers
     services.fprintd = {

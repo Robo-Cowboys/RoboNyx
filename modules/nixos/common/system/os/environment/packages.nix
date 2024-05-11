@@ -1,9 +1,14 @@
 {
   pkgs,
+  config,
   lib,
   ...
-}: {
-  config = {
+}: let
+  inherit (lib) mkIf;
+
+  roles = config.my.roles;
+in {
+  config = mkIf roles.common {
     environment = {
       # nixos ships a bunch of packages by default under environment.defaultPackages
       # those do not add much to the system closure, but for a little added extra security

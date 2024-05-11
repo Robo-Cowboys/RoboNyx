@@ -1,9 +1,14 @@
 {
   pkgs,
+  config,
   lib,
   ...
-}: {
-  config = {
+}: let
+  inherit (lib.modules) mkIf;
+
+  roles = config.my.roles;
+in {
+  config = mkIf roles.common {
     services.logrotate.settings.header = {
       # general
       global = true;

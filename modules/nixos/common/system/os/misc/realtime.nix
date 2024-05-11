@@ -1,11 +1,20 @@
-{config, ...}: {
-  config = {
+{
+  config,
+  lib,
+  ...
+}: let
+  inherit (lib) mkIf;
+
+  roles = config.my.roles;
+  sys = config.my.system;
+in {
+  config = mkIf roles.common {
     # port of https://gitlab.archlinux.org/archlinux/packaging/packages/realtime-privileges
     # see https://wiki.archlinux.org/title/Realtime_process_management
     # tldr: realtime processes have higher priority than normal processes
     # and that's a good thing
     users = {
-      users."${config.my.system.mainUser}".extraGroups = ["realtime"];
+      users."${sys.mainUser}".extraGroups = ["realtime"];
       groups.realtime = {};
     };
 

@@ -1,5 +1,13 @@
-_: {
-  config = {
+{
+  config,
+  lib,
+  ...
+}: let
+  inherit (lib) mkIf;
+
+  roles = config.my.roles;
+in {
+  config = mkIf roles.common {
     security = {
       pam = {
         # fix "too many files open" errors while writing a lot of data at once

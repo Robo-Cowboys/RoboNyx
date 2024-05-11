@@ -6,9 +6,10 @@
   inherit (lib) mkIf;
 
   sys = config.my.system;
+  roles = config.my.roles;
   auditEnabled = sys.security.auditd.enable;
 in {
-  config = mkIf auditEnabled {
+  config = mkIf (auditEnabled && roles.common) {
     security = {
       # system audit
       auditd.enable = true;

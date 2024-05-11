@@ -13,12 +13,24 @@
       category = "build";
     }
     {
-      help = "Flash ISO image to USB";
-      name = "flash";
+      help = "Build Self-made live recovery environment that overrides or/and configures certain default programs provides tools and fixes the keymaps for my keyboard.";
+      name = "build-rec";
       command = ''
         mkdir -p result
         export ISO_PATH=$(nix --extra-experimental-features 'nix-command' --extra-experimental-features 'flakes' build .\#install-isoConfigurations.installer --no-link --print-out-paths -L)
         export ISO_NAME=$(nix --extra-experimental-features 'nix-command' --extra-experimental-features 'flakes' eval .\#install-isoConfigurations.installer.isoName --raw)
+
+        cp -rv "$ISO_PATH/iso/$ISO_NAME" "result/$ISO_NAME"
+      '';
+      category = "build";
+    }
+    {
+      help = "Build an air-gapped NixOS live media to deal with sensitive tooling (e.g. Yubikey, GPG, etc.) isolated from all networking";
+      name = "build-air";
+      command = ''
+        mkdir -p result
+        export ISO_PATH=$(nix --extra-experimental-features 'nix-command' --extra-experimental-features 'flakes' build .\#isoConfigurations.airgap --no-link --print-out-paths -L)
+        export ISO_NAME=$(nix --extra-experimental-features 'nix-command' --extra-experimental-features 'flakes' eval .\#isoConfigurations.airgap.isoName --raw)
 
         cp -rv "$ISO_PATH/iso/$ISO_NAME" "result/$ISO_NAME"
       '';
