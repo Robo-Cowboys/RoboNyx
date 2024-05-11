@@ -100,9 +100,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # use my own wallpapers repository to provide various wallpapers as nix packages
+    # use our shared wallpapers repository to provide various wallpapers as nix packages
     wallpkgs = {
-      url = "github:use-the-fork/wallpkgs";
+      url = "github:Spacebar-Cowboys/wallpkgs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -137,7 +137,7 @@
       inputs.treefmt-nix.flakeModule
     ];
 
-    home.users."sincore@sushi".modules = with inputs; [
+    homes.modules = with inputs; [
       hyprland.homeManagerModules.default
       hypridle.homeManagerModules.hypridle
       sops-nix.homeManagerModules.sops
@@ -145,8 +145,6 @@
     ];
 
     systems.modules.nixos = with inputs; [
-      #pins stave version across all systems
-      ({lib, ...}: {system.stateVersion = lib.my.stateVersion.nixos;})
 
       home-manager.nixosModules.home-manager
       hyprland.nixosModules.default
