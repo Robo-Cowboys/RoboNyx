@@ -11,7 +11,6 @@
 in {
   system = {
     autoUpgrade.enable = false;
-    stateVersion = lib.my.stateVersion.nixos;
   };
 
   environment = {
