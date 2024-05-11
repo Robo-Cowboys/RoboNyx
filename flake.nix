@@ -145,7 +145,6 @@
     ];
 
     systems.modules.nixos = with inputs; [
-
       home-manager.nixosModules.home-manager
       hyprland.nixosModules.default
 

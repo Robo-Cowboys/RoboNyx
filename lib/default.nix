@@ -10,5 +10,4 @@ in {
   inherit serializeTheme compileSCSS;
   inherit mkGraphicalService mkHyprlandService;
   inherit ifTheyExist ifGroupsExist isAcceptedDevice isWayland ifOneEnabled;
-
 }
