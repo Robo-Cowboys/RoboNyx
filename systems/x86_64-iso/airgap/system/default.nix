@@ -6,7 +6,6 @@
     ./environment.nix
     ./fonts.nix
     ./networking.nix
-    ./nix.nix
     ./programs.nix
     ./security.nix
     ./services.nix
