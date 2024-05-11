@@ -7,7 +7,7 @@
 }: let
   inherit (lib) mkIf;
 in {
-  config = mkIf config.my.modules.headless {
+  config = mkIf config.my.roles.headless {
     users.motd = let
       exec = package: program: "${package}/bin/${program}";
       util = exec pkgs.coreutils;

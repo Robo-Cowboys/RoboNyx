@@ -6,7 +6,7 @@
 }: let
   inherit (lib.modules) mkForce mkIf;
 in {
-  config = mkIf config.my.modules.iso {
+  config = mkIf config.my.roles.iso {
     boot = {
       # use the latest Linux kernel
       kernelPackages = pkgs.linuxPackages_latest;

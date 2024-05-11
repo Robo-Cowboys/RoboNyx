@@ -5,7 +5,7 @@
 }: let
   inherit (lib) mkIf;
 in {
-  config = mkIf config.my.modules.iso {
+  config = mkIf config.my.roles.iso {
     users.extraUsers.root.password = "";
 
     users.users.nixos = {

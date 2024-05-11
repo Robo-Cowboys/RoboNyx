@@ -4,13 +4,14 @@
   ...
 }:
 with lib; let
-  inherit (config.my) device;
+  inherit (lib) mkIf;
+  inherit (config.my) roles;
 in {
   imports = [
     ./touchpad.nix
   ];
 
-  config = lib.mkIf (device.type == "laptop") {
+  config = mkIf roles.laptop {
     powerManagement.enable = true;
 
     services = {

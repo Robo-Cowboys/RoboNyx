@@ -6,7 +6,7 @@
 }: let
   inherit (lib) mkIf;
 in {
-  config = mkIf config.my.modules.microvm {
+  config = mkIf config.my.roles.microvm {
     time.timeZone = "UTC";
     i18n.defaultLocale = "en_US.UTF-8";
 

@@ -4,8 +4,9 @@
   ...
 }: let
   inherit (lib) mkIf;
+  inherit (config.my) roles;
 in {
-  config = mkIf (config.my.device.type == "laptop") {
+  config = mkIf roles.laptop {
     services = {
       # Input settings for libinput
       xserver.libinput = {

@@ -35,7 +35,7 @@
     ];
   };
 in {
-  config = lib.mkIf config.my.modules.graphical {
+  config = lib.mkIf config.my.roles.graphical {
     services.greetd = {
       enable = true;
       vt = 2;

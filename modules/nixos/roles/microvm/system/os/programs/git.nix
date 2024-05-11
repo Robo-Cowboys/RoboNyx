@@ -5,7 +5,7 @@
 }: let
   inherit (lib) mkIf;
 in {
-  config = mkIf config.my.modules.microvm {
+  config = mkIf config.my.roles.microvm {
     programs.git.enable = true;
   };
 }

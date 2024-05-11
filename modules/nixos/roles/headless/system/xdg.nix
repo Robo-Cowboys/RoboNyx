@@ -5,7 +5,7 @@
 }: let
   inherit (lib) mkForce mapAttrs mkIf;
 in {
-  config = mkIf config.my.modules.headless {
+  config = mkIf config.my.roles.headless {
     xdg = mapAttrs (_: mkForce) {
       sounds.enable = false;
       mime.enable = false;
