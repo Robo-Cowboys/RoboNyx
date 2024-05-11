@@ -1,0 +1,7 @@
+legacy/shell/.yarnrc
+legacy/misc/oh-my-zsh-custom/plugins/
+result
+.direnv/
+.devenv/
+.pre-commit-config.yaml
+.idea/
