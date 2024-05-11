@@ -1366,15 +1366,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1691155724,
-        "narHash": "sha256-eKauqoDqQPkWwXn/2rIK7HJJdE+/9NQTtV1RHtt32Aw=",
-        "owner": "use-the-fork",
+        "lastModified": 1715436135,
+        "narHash": "sha256-LbFPUhtDfUWWPnm4qHIMsFH3YmihcBpDe3yAWVvzXbQ=",
+        "owner": "Spacebar-Cowboys",
         "repo": "wallpkgs",
-        "rev": "13e36d84d62ec43a7b1e21b84a42e8d5b4e718ee",
+        "rev": "81d82ff3d129fa3a540f7bcfa824983dc38fe422",
         "type": "github"
       },
       "original": {
-        "owner": "use-the-fork",
+        "owner": "Spacebar-Cowboys",
         "repo": "wallpkgs",
         "type": "github"
       }
