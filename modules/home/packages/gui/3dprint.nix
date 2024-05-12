@@ -13,6 +13,7 @@ in {
   config = mkIf (prg.gui.enable && sys.printing."3d".enable) {
     home.packages = with pkgs; [
       orca-slicer
+      prusa-slicer
       openscad-unstable
     ];
   };
