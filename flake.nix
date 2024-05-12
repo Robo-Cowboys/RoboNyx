@@ -62,7 +62,7 @@
 
     #Hyprland and related Plugins... Stabily unstable.
     hyprland = {
-      url = "github:hyprwm/Hyprland";
+      url = "github:hyprwm/Hyprland/v0.39.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
