@@ -129,50 +129,60 @@
     };
   };
 
-  outputs = inputs: (inputs.snowfall-lib.mkFlake {
-    inherit inputs;
-    src = ./.;
+  outputs = inputs: {
 
-    imports = [
-      inputs.pre-commit-hooks.flakeModule
-      inputs.treefmt-nix.flakeModule
-    ];
+    # You can define configurations here
 
-    homes.modules = with inputs; [
-      hyprland.homeManagerModules.default
-      hypridle.homeManagerModules.hypridle
-      sops-nix.homeManagerModules.sops
-      snowfall-lib.homeModules.user
-    ];
 
-    systems.modules.nixos = with inputs; [
-      home-manager.nixosModules.home-manager
-      hyprland.nixosModules.default
-
-      # Erase your darlings.
-      impermanence.nixosModules.impermanence
-
-      #Sops everywhere!
-      sops-nix.nixosModules.sops
-
-      #generators everywhere!
-      nixos-generators.nixosModules.all-formats
-
-      #disko for disk setup
-      disko.nixosModules.disko
-    ];
-
-    snowfall = {namespace = "my";};
-    channels-config = {
-      allowUnfree = true;
+    nixosModules.default = { config, ... }: {
+        options = ./options;
+        config = ./modules;
     };
-    outputs-builder = channels: {
-      formatter = channels.nixpkgs.alejandra;
-    };
-    alias.shells = {
-      default = "default";
-    };
-  });
+
+#    nixosModules.default = { config, ... }: { options = {}; config = {}; };
+
+#    inherit inputs;
+#    src = ./.;
+#
+#    imports = [
+#      inputs.pre-commit-hooks.flakeModule
+#      inputs.treefmt-nix.flakeModule
+#    ];
+#
+#    homes.modules = with inputs; [
+#      hyprland.homeManagerModules.default
+#      hypridle.homeManagerModules.hypridle
+#      sops-nix.homeManagerModules.sops
+#      snowfall-lib.homeModules.user
+#    ];
+#
+#    systems.modules.nixos = with inputs; [
+#      home-manager.nixosModules.home-manager
+#      hyprland.nixosModules.default
+#
+#      # Erase your darlings.
+#      impermanence.nixosModules.impermanence
+#
+#      #Sops everywhere!
+#      sops-nix.nixosModules.sops
+#
+#      #generators everywhere!
+#      nixos-generators.nixosModules.all-formats
+#
+#      #disko for disk setup
+#      disko.nixosModules.disko
+#    ];
+#    snowfall = {namespace = "my";};
+#    channels-config = {
+#      allowUnfree = true;
+#    };
+#    outputs-builder = channels: {
+#      formatter = channels.nixpkgs.alejandra;
+#    };
+#    alias.shells = {
+#      default = "default";
+#    };
+  };
 
   nixConfig = {
     extra-substituters = [
