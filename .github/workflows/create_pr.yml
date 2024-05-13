@@ -45,6 +45,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: pr-upstream-${{ github.run_id }}
+          force: true
 
       - name: Create Pull Request
         uses: repo-sync/pull-request@v2
