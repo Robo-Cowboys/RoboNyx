@@ -1,4 +1,4 @@
-name: Sync to Upstream
+name: Sync Fork with Upstream
 
 on:
   push:
@@ -6,32 +6,52 @@ on:
       - main
 
 jobs:
-  create-pull-request:
+  sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the repo
-        uses: actions/checkout@v2
+      # Setup Git and GitHub CLI
+      - name: Checkout repository
+        uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Ensures all branches are fetched
+          fetch-depth: 0 # Ensure we get all commits for proper diffing
 
-      - name: Create temporary branch
+      - name: Setup Git
         run: |
-          git checkout -b temp-branch
-          git rm -r --cached systems homes
-          git commit -m "Remove changes in systems and homes directories"
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
 
-      - name: Push temporary branch
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: temp-branch
+      # Sync fork excluding specified directories
+      - name: Create temporary branch for PR
+        run: |
+          git checkout -b temp-pr-branch
 
+      - name: Fetch original
+        run: |
+          git remote add upstream https://github.com/Spacebar-Cowboys/nyx.git
+          git fetch upstream
+
+      - name: Merge changes excluding specific directories
+        run: |
+          git checkout main
+          git restore --source upstream/main --staged --worktree -- .
+          git reset HEAD systems/x86_64-linux/ homes/
+          git checkout HEAD systems/x86_64-linux/ homes/
+
+      - name: Commit changes
+        run: |
+          git add .
+          git commit -m "Syncing changes with upstream excluding specific directories"
+
+      - name: Push changes to GitHub
+        run: |
+          git push origin temp-pr-branch
+
+      # Create Pull Request using GitHub CLI
       - name: Create Pull Request
         uses: repo-sync/pull-request@v2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          destination_repo_url: https://github.com/Spacebar-Cowboys/nyx
-          destination_branch: main
-          pr_title: "Update from Fork"
-          pr_body: "This is an automated PR to sync changes excluding specific folders."
-          pr_label: "automated-pr"
+          pr_title: "Update from upstream"
+          pr_body: "Merged changes from the original repository excluding 'systems/x86_64-linux' and 'homes' directories."
+          destination_branch: "main"
+          source_branch: "temp-pr-branch"
