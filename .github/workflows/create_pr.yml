@@ -23,9 +23,10 @@ jobs:
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
 
-      - name: Create temporary branch for PR
+      - name: Create dynamic branch for PR
         run: |
-          git checkout -b temp-pr-branch
+          BRANCH_NAME="update-${{ github.run_id }}"
+          git checkout -b $BRANCH_NAME
 
       - name: Fetch original
         run: |
@@ -55,7 +56,7 @@ jobs:
 
       - name: Push changes to GitHub
         run: |
-          git push --set-upstream origin temp-pr-branch
+          git push --set-upstream origin $BRANCH_NAME
 
       - name: Create or Update Pull Request
         run: |
@@ -64,7 +65,7 @@ jobs:
           }
           gh_pr_up --title "Update from upstream" \
                    --body "Merged changes from the original repository excluding 'systems/x86_64-linux' and 'homes' directories." \
-                   --head use-the-fork:temp-pr-branch \
+                   --head use-the-fork:$BRANCH_NAME \
                    --base main \
                    --repo Spacebar-Cowboys/nyx
         env:
