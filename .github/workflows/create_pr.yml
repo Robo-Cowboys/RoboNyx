@@ -50,7 +50,7 @@ jobs:
       - name: Create Pull Request
         uses: repo-sync/pull-request@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.MY_PERSONAL_TOKEN }}
           pr_title: "Update from upstream"
           pr_body: "Merged changes from the original repository excluding 'systems/x86_64-linux' and 'homes' directories."
           destination_branch: "main"
