@@ -13,11 +13,10 @@ jobs:
   sync-and-pr:
     runs-on: ubuntu-latest
     steps:
-      # Setup Git and GitHub CLI
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # Ensure we get all commits for proper diffing
+          fetch-depth: 0
 
       - name: Setup Git
         run: |
@@ -47,11 +46,13 @@ jobs:
 
       - name: Push changes to GitHub
         run: |
-          git push origin temp-pr-branch
+          git push --set-upstream origin temp-pr-branch
 
       - name: Create or Update Pull Request
         run: |
-          gh_pr_up() { gh pr create $* || gh pr edit $* }
+          function gh_pr_up() {
+            gh pr create "$@" || gh pr edit "$@"
+          }
           gh_pr_up --title "Update from upstream" \
                    --body "Merged changes from the original repository excluding 'systems/x86_64-linux' and 'homes' directories." \
                    --head use-the-fork:temp-pr-branch \
