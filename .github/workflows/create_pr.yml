@@ -1,0 +1,76 @@
+name: Sync Fork with Upstream and Create PR
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync-and-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Git
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name: Create dynamic branch for PR
+        run: |
+          BRANCH_NAME="update-${{ github.run_id }}"
+          git checkout -b $BRANCH_NAME
+
+      - name: Fetch original
+        run: |
+          git remote add upstream https://github.com/Spacebar-Cowboys/nyx.git
+          git fetch upstream
+
+      - name: Temporarily ignore certain directories
+        run: |
+          echo "systems/x86_64-linux/" >> .gitignore
+          echo "homes/" >> .gitignore
+          git config --global core.excludesfile .gitignore
+
+      - name: Merge changes excluding specific directories
+        run: |
+          git checkout main
+          git restore --source upstream/main --staged --worktree -- .
+          git add .
+          git reset -- .gitignore  # Make sure .gitignore itself is not committed
+
+      - name: Commit changes
+        run: |
+          if git commit -m "Syncing changes with upstream excluding specific directories"; then
+            echo "Changes committed."
+          else
+            echo "No changes to commit."
+          fi
+
+      - name: Push changes to GitHub
+        run: |
+          git push --set-upstream origin $BRANCH_NAME
+
+      - name: Create or Update Pull Request
+        run: |
+          function gh_pr_up() {
+            # Ensure correct usage of the branch and repo syntax
+            gh pr create --title "Update from upstream" \
+                         --body "Merged changes from the original repository excluding 'systems/x86_64-linux' and 'homes' directories." \
+                         --head "${{ github.actor }}:$BRANCH_NAME" \
+                         --base main \
+                         --repo Spacebar-Cowboys/nyx \
+                         --fill || gh pr edit --add-label "automated-pr" \
+                                      --title "Update from upstream" \
+                                      --body "Automated PR to merge changes excluding specified directories."
+          }
+          gh_pr_up
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_PERSONAL_TOKEN }}
