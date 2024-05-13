@@ -32,21 +32,18 @@ jobs:
           git remote add upstream https://github.com/Spacebar-Cowboys/nyx.git
           git fetch upstream
 
+      - name: Temporarily ignore certain directories
+        run: |
+          echo "systems/x86_64-linux/" >> .gitignore
+          echo "homes/" >> .gitignore
+          git config --global core.excludesfile .gitignore
+
       - name: Merge changes excluding specific directories
         run: |
           git checkout main
           git restore --source upstream/main --staged --worktree -- .
-
-          # Check if directories exist and if so, reset and checkout to ignore changes
-          if [ -d "systems/x86_64-linux" ]; then
-            git reset -- systems/x86_64-linux/
-            git checkout -- systems/x86_64-linux/
-          fi
-          if [ -d "homes" ]; then
-            git reset -- homes/
-            git checkout -- homes/
-          fi
           git add .
+          git reset -- .gitignore  # Make sure .gitignore itself is not committed
 
       - name: Commit changes
         run: |
