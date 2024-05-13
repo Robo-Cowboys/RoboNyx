@@ -3,7 +3,7 @@ name: Sync Fork with Upstream and Create PR
 on:
   push:
     branches:
-      - main
+      - upstream
 
 permissions:
   contents: write
