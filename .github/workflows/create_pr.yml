@@ -50,9 +50,10 @@ jobs:
       - name: Create Pull Request
         uses: repo-sync/pull-request@v2
         with:
-          github_token: ${{ secrets.MY_PERSONAL_TOKEN }}
+          github_token: ${{ secrets.MY_PERSONAL_TOKEN }}  # Make sure this token has the necessary permissions
           pr_title: "Update from upstream"
           pr_body: "Merged changes from the original repository excluding 'systems/x86_64-linux' and 'homes' directories."
           destination_branch: "main"
-          source_branch: "temp-pr-branch"
-          destination_repository: "Spacebar-Cowboys/nyx"  # Point to the original repository
+          source_branch: "use-the-fork:temp-pr-branch"  # Specify your fork's username or organization and branch
+          destination_repository: "Spacebar-Cowboys/nyx"
+
