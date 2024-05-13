@@ -61,12 +61,16 @@ jobs:
       - name: Create or Update Pull Request
         run: |
           function gh_pr_up() {
-            gh pr create "$@" || gh pr edit "$@"
+            # Ensure correct usage of the branch and repo syntax
+            gh pr create --title "Update from upstream" \
+                         --body "Merged changes from the original repository excluding 'systems/x86_64-linux' and 'homes' directories." \
+                         --head "${{ github.actor }}:$BRANCH_NAME" \
+                         --base main \
+                         --repo Spacebar-Cowboys/nyx \
+                         --fill || gh pr edit --add-label "automated-pr" \
+                                      --title "Update from upstream" \
+                                      --body "Automated PR to merge changes excluding specified directories."
           }
-          gh_pr_up --title "Update from upstream" \
-                   --body "Merged changes from the original repository excluding 'systems/x86_64-linux' and 'homes' directories." \
-                   --head use-the-fork:$BRANCH_NAME \
-                   --base main \
-                   --repo Spacebar-Cowboys/nyx
+          gh_pr_up
         env:
           GITHUB_TOKEN: ${{ secrets.MY_PERSONAL_TOKEN }}
