@@ -43,15 +43,14 @@ jobs:
       - name: Push to GitHub
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.MY_PERSONAL_TOKEN }}
           branch: pr-upstream-${{ github.run_id }}
-          force: true
 
       - name: Create Pull Request
         uses: repo-sync/pull-request@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.MY_PERSONAL_TOKEN }}
           destination_branch: "main"
           source_branch: pr-upstream-${{ github.run_id }}
-          pr_title: "Automated PR from Use-The-Fork"
+          pr_title: "Automated PR from ${{ github.actor }}"
           pr_body: "Automated PR to merge changes excluding 'systems' and 'homes' directories."
