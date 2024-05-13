@@ -29,18 +29,15 @@ jobs:
         run: |
           git checkout -b pr-upstream-${{ github.run_id }}
 
-      - name: Restore Deleted Files in 'systems' and 'homes'
+      - name: Exclude 'systems' and 'homes' Directories
         run: |
-          git ls-files --deleted | grep -E "^(systems/|homes/)" | xargs -r git checkout HEAD --
-
-      - name: Reset and Restore 'systems' and 'homes'
-        run: |
-          git restore --source upstream/main --staged --worktree -- systems/ homes/
+          git ls-files --deleted 'systems/' 'homes/' | xargs -r git rm --cached
+          git restore --source=upstream/main --staged --worktree -- 'systems/' 'homes/'
 
       - name: Commit Changes
         run: |
           git add .
-          git reset -- systems/ homes/  # Ensure no changes in systems or homes are staged
+          git reset -- 'systems/' 'homes/'  # Ensure no changes in systems or homes are staged
           git commit -m "Filtered changes for PR to upstream"
 
       - name: Push to GitHub
