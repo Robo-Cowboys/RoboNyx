@@ -1,4 +1,4 @@
-name: Create Pull Request to Upstream
+name: Sync to Upstream
 
 on:
   push:
@@ -8,53 +8,30 @@ on:
 jobs:
   create-pull-request:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
+      - name: Checkout the repo
         uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 0  # Ensures all branches are fetched
 
-      - name: Setup Git Config
+      - name: Create temporary branch
         run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git checkout -b temp-branch
+          git rm -r --cached systems homes
+          git commit -m "Remove changes in systems and homes directories"
 
-      - name: Add Upstream Remote
-        run: |
-          git remote add upstream https://github.com/Spacebar-Cowboys/nyx.git
-          git fetch upstream
-
-      - name: Checkout New Branch
-        run: |
-          git checkout -b pr-upstream-${{ github.run_id }} upstream/main
-
-      - name: Cherry-pick Commits Excluding Certain Directories
-        run: |
-          git log --format="%H" upstream/main..origin/main | while read commit_hash; do
-            if ! git cherry-pick $commit_hash; then
-              git rm --cached -r .github/workflows/* || true  # Remove conflicted workflow files
-              git commit --amend --no-edit  # Amend the commit to resolve conflicts
-            fi
-            git rm -r --cached systems/ homes/ || true  # Exclude directories
-            git commit --amend --no-edit
-          done
-
-      - name: Commit Changes
-        run: |
-          git commit -m "Filtered changes for PR to upstream" || echo "No changes to commit"
-
-      - name: Push to GitHub
+      - name: Push temporary branch
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.MY_PERSONAL_TOKEN }}
-          branch: pr-upstream-${{ github.run_id }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: temp-branch
 
       - name: Create Pull Request
         uses: repo-sync/pull-request@v2
         with:
-          github_token: ${{ secrets.MY_PERSONAL_TOKEN }}
-          destination_branch: "main"
-          source_branch: pr-upstream-${{ github.run_id }}
-          pr_title: "Automated PR from Use-The-Fork"
-          pr_body: "Automated PR to merge changes excluding 'systems' and 'homes' directories."
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          destination_repo_url: https://github.com/Spacebar-Cowboys/nyx
+          destination_branch: main
+          pr_title: "Update from Fork"
+          pr_body: "This is an automated PR to sync changes excluding specific folders."
+          pr_label: "automated-pr"
