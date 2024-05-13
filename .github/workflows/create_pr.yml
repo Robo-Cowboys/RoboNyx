@@ -36,13 +36,17 @@ jobs:
         run: |
           git checkout main
           git restore --source upstream/main --staged --worktree -- .
+
+          # Check if directories exist and if so, reset and checkout to ignore changes
+          if [ -d "systems/x86_64-linux" ]; then
+            git reset -- systems/x86_64-linux/
+            git checkout -- systems/x86_64-linux/
+          fi
+          if [ -d "homes" ]; then
+            git reset -- homes/
+            git checkout -- homes/
+          fi
           git add .
-
-          # Explicitly exclude directories from being added to the commit
-          git reset systems/x86_64-linux/ homes/
-
-          # Ensure the working tree does not track changes in the excluded directories
-          git checkout -- systems/x86_64-linux/ homes/
 
       - name: Commit changes
         run: |
