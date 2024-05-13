@@ -1,12 +1,16 @@
-name: Sync Fork with Upstream
+name: Sync Fork with Upstream and Create PR
 
 on:
   push:
     branches:
       - main
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
-  sync:
+  sync-and-pr:
     runs-on: ubuntu-latest
     steps:
       # Setup Git and GitHub CLI
@@ -20,7 +24,6 @@ jobs:
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
 
-      # Sync fork excluding specified directories
       - name: Create temporary branch for PR
         run: |
           git checkout -b temp-pr-branch
@@ -40,21 +43,19 @@ jobs:
       - name: Commit changes
         run: |
           git add .
-          git commit -m "Syncing changes with upstream excluding specific directories"
+          git commit -m "Syncing changes with upstream excluding specific directories" || echo "No changes to commit"
 
       - name: Push changes to GitHub
         run: |
           git push origin temp-pr-branch
 
-      # Create Pull Request using GitHub CLI
-      - name: Create Pull Request
-        uses: repo-sync/pull-request@v2
-        with:
-          github_token: ${{ secrets.MY_PERSONAL_TOKEN }}
-          pr_title: "Update from upstream"
-          pr_body: "Merged changes from the original repository excluding 'systems/x86_64-linux' and 'homes' directories."
-          destination_branch: "main"
-          source_branch: "temp-pr-branch"
-          destination_repository: "Spacebar-Cowboys/nyx"
-          source_repository: "use-the-fork/nyx"  # Add this line if the action supports it
-
+      - name: Create or Update Pull Request
+        run: |
+          gh_pr_up() { gh pr create $* || gh pr edit $* }
+          gh_pr_up --title "Update from upstream" \
+                   --body "Merged changes from the original repository excluding 'systems/x86_64-linux' and 'homes' directories." \
+                   --head use-the-fork:temp-pr-branch \
+                   --base main \
+                   --repo Spacebar-Cowboys/nyx
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_PERSONAL_TOKEN }}
