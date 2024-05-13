@@ -32,8 +32,11 @@ jobs:
       - name: Cherry-pick Commits Excluding Certain Directories
         run: |
           git log --format="%H" upstream/main..origin/main | while read commit_hash; do
-            git cherry-pick $commit_hash
-            git rm -r --cached systems/ homes/ || true
+            if ! git cherry-pick $commit_hash; then
+              git rm --cached -r .github/workflows/* || true  # Remove conflicted workflow files
+              git commit --amend --no-edit  # Amend the commit to resolve conflicts
+            fi
+            git rm -r --cached systems/ homes/ || true  # Exclude directories
             git commit --amend --no-edit
           done
 
