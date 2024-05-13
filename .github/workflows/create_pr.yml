@@ -25,17 +25,21 @@ jobs:
           git remote add upstream https://github.com/Spacebar-Cowboys/nyx.git
           git fetch upstream
 
-      - name: Create New Branch for PR
+      - name: Checkout New Branch
         run: |
-          git checkout -b pr-upstream-${{ github.run_id }}
+          git checkout -b pr-upstream-${{ github.run_id }} upstream/main
 
-      - name: Exclude 'systems' and 'homes' Directories Using Filter Branch
+      - name: Cherry-pick Commits Excluding Certain Directories
         run: |
-          git filter-branch --tree-filter 'rm -rf systems/ homes/' HEAD
+          git log --format="%H" upstream/main..origin/main | while read commit_hash; do
+            git cherry-pick $commit_hash
+            git rm -r --cached systems/ homes/ || true
+            git commit --amend --no-edit
+          done
 
       - name: Commit Changes
         run: |
-          git commit -am "Filtered changes for PR to upstream" || echo "No changes to commit"
+          git commit -m "Filtered changes for PR to upstream" || echo "No changes to commit"
 
       - name: Push to GitHub
         uses: ad-m/github-push-action@master
