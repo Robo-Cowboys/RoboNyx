@@ -32,22 +32,25 @@ jobs:
           git remote add upstream https://github.com/Spacebar-Cowboys/nyx.git
           git fetch upstream
 
-      - name: Exclude directories
+      - name: Merge changes excluding specific directories
         run: |
           git checkout main
           git restore --source upstream/main --staged --worktree -- .
-          if [ -d "systems/x86_64-linux" ]; then
-            git rm --cached -r systems/x86_64-linux/
-          fi
-          if [ -d "homes" ]; then
-            git rm --cached -r homes/
-          fi
-          git checkout HEAD systems/x86_64-linux/ homes/  # Restore your versions of the directories
+          git add .
+
+          # Explicitly exclude directories from being added to the commit
+          git reset systems/x86_64-linux/ homes/
+
+          # Ensure the working tree does not track changes in the excluded directories
+          git checkout -- systems/x86_64-linux/ homes/
 
       - name: Commit changes
         run: |
-          git add .
-          git commit -m "Syncing changes with upstream excluding specific directories" || echo "No changes to commit"
+          if git commit -m "Syncing changes with upstream excluding specific directories"; then
+            echo "Changes committed."
+          else
+            echo "No changes to commit."
+          fi
 
       - name: Push changes to GitHub
         run: |
