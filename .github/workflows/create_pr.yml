@@ -29,16 +29,13 @@ jobs:
         run: |
           git checkout -b pr-upstream-${{ github.run_id }}
 
-      - name: Exclude 'systems' and 'homes' Directories
+      - name: Exclude 'systems' and 'homes' Directories Using Filter Branch
         run: |
-          git ls-files --deleted 'systems/' 'homes/' | xargs -r git rm --cached
-          git restore --source=upstream/main --staged --worktree -- 'systems/' 'homes/'
+          git filter-branch --tree-filter 'rm -rf systems/ homes/' HEAD
 
       - name: Commit Changes
         run: |
-          git add .
-          git reset -- 'systems/' 'homes/'  # Ensure no changes in systems or homes are staged
-          git commit -m "Filtered changes for PR to upstream"
+          git commit -am "Filtered changes for PR to upstream" || echo "No changes to commit"
 
       - name: Push to GitHub
         uses: ad-m/github-push-action@master
