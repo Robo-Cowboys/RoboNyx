@@ -25,8 +25,7 @@ jobs:
 
       - name: Create dynamic branch for PR
         run: |
-          BRANCH_NAME="update-${{ github.run_id }}"
-          git checkout -b $BRANCH_NAME
+          git checkout -b "update-${{ github.run_id }}"
 
       - name: Fetch original
         run: |
@@ -56,21 +55,15 @@ jobs:
 
       - name: Push changes to GitHub
         run: |
-          git push --set-upstream origin $BRANCH_NAME
+          git push --set-upstream origin "update-${{ github.run_id }}"
 
       - name: Create or Update Pull Request
         run: |
-          function gh_pr_up() {
-            # Ensure correct usage of the branch and repo syntax
-            gh pr create --title "Update from upstream" \
-                         --body "Merged changes from the original repository excluding 'systems/x86_64-linux' and 'homes' directories." \
-                         --head "${{ github.actor }}:$BRANCH_NAME" \
-                         --base main \
-                         --repo Spacebar-Cowboys/nyx \
-                         --fill || gh pr edit --add-label "automated-pr" \
-                                      --title "Update from upstream" \
-                                      --body "Automated PR to merge changes excluding specified directories."
-          }
-          gh_pr_up
+          gh pr create --title "Update from upstream" \
+                       --body "Merged changes from the original repository excluding 'systems/x86_64-linux' and 'homes' directories." \
+                       --head "${{ github.actor }}:update-${{ github.run_id }}" \
+                       --base main \
+                       --repo Spacebar-Cowboys/nyx \
+                       --fill || echo "Error or no changes to create a PR."
         env:
           GITHUB_TOKEN: ${{ secrets.MY_PERSONAL_TOKEN }}
