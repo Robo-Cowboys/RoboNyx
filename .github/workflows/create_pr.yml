@@ -31,14 +31,14 @@ jobs:
 
       - name: Reset Files in 'systems' and 'homes'
         run: |
-          git checkout upstream/main -- .
-          git reset HEAD systems/ homes/
-          git checkout -- systems/ homes/
+          git restore --source upstream/main --staged --worktree -- systems/ homes/
 
       - name: Commit Changes
         run: |
           git add .
+          git reset -- systems/ homes/  # Explicitly remove systems and homes from the staging area
           git commit -m "Filtered changes for PR to upstream"
+          # This ensures that no changes from systems or homes are included
 
       - name: Push to GitHub
         uses: ad-m/github-push-action@master
@@ -52,5 +52,5 @@ jobs:
           github_token: ${{ secrets.MY_PERSONAL_TOKEN }}
           destination_branch: "main"
           source_branch: pr-upstream-${{ github.run_id }}
-          pr_title: "Automated PR from ${{ github.actor }}"
+          pr_title: "Automated PR from Use-The-Fork"
           pr_body: "Automated PR to merge changes excluding 'systems' and 'homes' directories."
