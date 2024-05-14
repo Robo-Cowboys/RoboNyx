@@ -44,7 +44,6 @@ in
       python310Packages.mdformat
       shfmt
       # some python stuff for waybar scripting
-      #testing if upstream works.
     ];
   }
   // {
