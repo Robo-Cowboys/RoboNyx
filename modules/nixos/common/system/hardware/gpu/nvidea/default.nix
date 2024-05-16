@@ -15,11 +15,10 @@
     then config.boot.kernelPackages.nvidiaPackages.stable
     else config.boot.kernelPackages.nvidiaPackages.beta;
 
-  dev = config.my.device;
-  env = config.my.usrEnv;
-  roles = config.my.roles;
+  dev = config.modules.device;
+  env = config.modules.usrEnv;
 in {
-  config = mkIf (builtins.elem dev.gpu.type ["nvidia" "hybrid-nv"] && roles.common) {
+  config = mkIf (builtins.elem dev.gpu.type ["nvidia" "hybrid-nv"]) {
     # nvidia drivers are unfree software
     nixpkgs.config.allowUnfree = true;
 

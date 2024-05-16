@@ -5,10 +5,9 @@
 }: let
   inherit (lib) mkIf mkMerge;
 
-  sys = config.my.system;
-  roles = config.my.roles;
+  sys = config.modules.system;
 in {
-  config = mkIf roles.common (mkMerge [
+  config = (mkMerge [
     (mkIf (builtins.elem "btrfs" sys.fs) {
       # scrub btrfs devices
       services.btrfs.autoScrub = {

@@ -5,6 +5,7 @@ imports = [
   ./impermanence
   ./nix
   ./os
+  ./security
   ./virtualisation
 ];
 }

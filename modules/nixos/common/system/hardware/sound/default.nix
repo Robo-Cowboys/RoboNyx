@@ -4,9 +4,8 @@
   ...
 }: let
   inherit (lib) mkIf;
-  roles = config.my.roles;
 in {
-  config = mkIf (config.my.device.hasSound && roles.common) {
+  config = mkIf (config.modules.device.hasSound) {
     sound = {
       enable = true;
       mediaKeys.enable = true;

@@ -3,12 +3,8 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib.modules) mkIf;
-
-  roles = config.my.roles;
-in {
-  config = mkIf roles.common {
+}: {
+  config = {
     services.logrotate.settings.header = {
       # general
       global = true;

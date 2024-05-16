@@ -7,14 +7,13 @@
 }: let
   inherit (lib) mkIf;
 
-  sys = config.my.system.boot;
-  roles = config.my.roles;
+  sys = config.modules.system.boot;
 in {
   imports = [
     inputs.lanzaboote.nixosModules.lanzaboote
   ];
 
-  config = mkIf (sys.secureBoot && roles.common) {
+  config = mkIf sys.secureBoot {
     environment.systemPackages = [
       # For debugging and troubleshooting Secure Boot.
       pkgs.sbctl

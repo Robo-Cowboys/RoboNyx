@@ -1,4 +1,4 @@
-{...}: {
+{
   imports = [
     ./realtime.nix
     ./crash.nix

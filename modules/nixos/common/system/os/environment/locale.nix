@@ -2,12 +2,8 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib) mkIf;
-
-  roles = config.my.roles;
-in {
-  config = mkIf roles.common {
+}:{
+  config = {
     time = {
       timeZone = "America/New_York";
       hardwareClockInLocalTime = true;

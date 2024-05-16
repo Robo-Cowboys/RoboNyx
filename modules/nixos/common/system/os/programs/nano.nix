@@ -3,12 +3,8 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib) mkIf;
-
-  roles = config.my.roles;
-in {
-  config = mkIf roles.common {
+}:{
+  config = {
     programs.nano = {
       # enabled by default anyway, we can keep it in case my neovim config breaks
       enable = true;

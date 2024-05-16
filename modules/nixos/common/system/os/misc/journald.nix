@@ -5,10 +5,9 @@
 }: let
   inherit (lib) mkIf;
 
-  dev = config.my.device;
-  roles = config.my.roles;
+  dev = config.modules.device;
 in {
-  config = mkIf roles.common {
+  config = {
     # https://wiki.archlinux.org/title/Systemd/Journal#Persistent_journals
     # limit systemd journal size
     # journals get big really fasti and on desktops they are not audited often

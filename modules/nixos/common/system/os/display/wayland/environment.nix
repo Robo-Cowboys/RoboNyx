@@ -5,11 +5,10 @@
 }: let
   inherit (lib) mkIf;
 
-  sys = config.my.system.video;
-  env = config.my.usrEnv;
-  roles = config.my.roles;
+  sys = config.modules.system.video;
+  env = config.modules.usrEnv;
 in {
-  config = mkIf (sys.enable && (lib.my.isWayland config) && roles.common) {
+  config = mkIf (sys.enable && (lib.isWayland config)) {
     environment.etc."greetd/environments".text = ''
       ${lib.optionalString (env.desktop == "Hyprland") "Hyprland"}
       zsh

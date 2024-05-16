@@ -2,11 +2,8 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib) mkIf;
-  roles = config.my.roles;
-in {
-  config = mkIf roles.common {
+}:{
+  config = {
     # compress half of the ram to use as swap
     # basically, get more memory per memory
     zramSwap = {

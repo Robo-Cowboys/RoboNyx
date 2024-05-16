@@ -5,10 +5,9 @@
 }: let
   inherit (lib) mkIf;
 
-  sys = config.my.system;
-  roles = config.my.roles;
+  sys = config.modules.system;
 in {
-  config = mkIf (sys.video.enable && roles.common) {
+  config = mkIf (sys.video.enable) {
     xdg.portal.config = {
       common = {
         "org.freedesktop.impl.portal.Secret" = [
