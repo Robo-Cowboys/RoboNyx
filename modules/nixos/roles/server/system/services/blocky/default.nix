@@ -5,7 +5,7 @@
 }: let
   inherit (lib) mkIf;
 in {
-  config = mkIf (config.modules.system.networking.blocky.enable && config.modules.roles.server) {
+  config = mkIf config.modules.system.networking.blocky.enable {
     services.blocky = {
       enable = true;
       settings = {
