@@ -5,9 +5,9 @@
 }: let
   inherit (lib) mkOption types;
 
-  cfg = config.my.usrEnv;
+  cfg = config.modules.usrEnv;
 in {
-  options.my.usrEnv = {
+  options.modules.usrEnv = {
     desktop = mkOption {
       type = types.enum ["none" "Hyprland" "sway" "awesomewm" "i3"];
       default = "none";
