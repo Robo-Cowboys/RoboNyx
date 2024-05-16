@@ -3,7 +3,7 @@
 
   mkEnableOption' = desc: mkEnableOption "${desc}" // {default = true;};
 in {
-  options.my.system = {
+  options.modules.system = {
     # networking
     networking = {
       blocky.enable = mkEnableOption "Blocky";

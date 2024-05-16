@@ -1,7 +1,7 @@
 {lib, ...}: let
   inherit (lib) mkOption mkEnableOption types;
 in {
-  options.my.system.security = {
+  options.modules.system.security = {
     fprint.enable = mkEnableOption "Fingerprint reader service";
 
     usbguard.enable = mkEnableOption "USBGuard service for blocking unauthorized USB devices";

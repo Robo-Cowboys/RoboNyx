@@ -1,11 +1,11 @@
 {lib, ...}: let
   inherit (lib) mkEnableOption;
-  #  sys = config.my.system;
+  #  sys = config.modules.system;
   #  cfg = sys.services;
   #  # mkEnableOption is the same as mkEnableOption but with the default value being equal to cfg.monitoring.enable
   #  mkEnableOption' = desc: mkEnableOption "${desc}" // {default = cfg.monitoring.enable;};
 in {
-  options.my.system = {
+  options.modules.system = {
     # monitoring tools
     monitoring = {
       enable = mkEnableOption "system monitoring stack";

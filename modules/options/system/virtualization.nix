@@ -1,7 +1,7 @@
 {lib, ...}: let
   inherit (lib) mkEnableOption;
 in {
-  options.my.system.virtualization = {
+  options.modules.system.virtualization = {
     enable = mkEnableOption "virtualization";
     libvirt = {enable = mkEnableOption "libvirt";};
     docker = {enable = mkEnableOption "docker";};

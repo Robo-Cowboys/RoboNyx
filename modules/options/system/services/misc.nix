@@ -1,7 +1,7 @@
 {lib, ...}: let
   inherit (lib) mkEnableOption mkOption types;
 in {
-  options.my.system = {
+  options.modules.system = {
     services = {
       flatpak = {
         enable = mkEnableOption "Flatpak";

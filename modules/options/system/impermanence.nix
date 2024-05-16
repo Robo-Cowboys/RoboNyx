@@ -5,9 +5,9 @@
 }: let
   inherit (lib) mkEnableOption mkOption literalExpression;
 
-  cfg = config.my.system.impermanence;
+  cfg = config.modules.system.impermanence;
 in {
-  options.my.system.impermanence = {
+  options.modules.system.impermanence = {
     enable = mkOption {
       default = cfg.root.enable || cfg.home.enable;
       readOnly = true;

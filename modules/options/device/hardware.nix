@@ -1,7 +1,7 @@
 {lib, ...}: let
   inherit (lib) mkOption mkEnableOption types;
 in {
-  options.my.device = {
+  options.modules.device = {
     type = mkOption {
       type = types.enum ["laptop" "desktop" "server" "hybrid" "lite" "vm"];
       default = "";

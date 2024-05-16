@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkOption types mkEnableOption;
-  cfg = config.my.style;
+  cfg = config.modules.style;
 in {
   options = {
-    my = {
+    modules = {
       style = {
         qt = {
           enable = mkEnableOption "QT Style Module";

@@ -6,7 +6,7 @@
   inherit (lib) mkOption mkEnableOption types;
 in {
   options = {
-    my = {
+    modules = {
       style = {
         # gtk specific options
         gtk = {
