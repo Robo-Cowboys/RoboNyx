@@ -8,7 +8,10 @@
 
   #TODO: Update this so it's pulled from the main system config.
   keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICDSw8KwWzGDDks1fHSiuJO915PDXYdgKHpj+4+6XYrW sincore@jupiter"
+      # Ubuntu key
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAXXUIUO43Ta9R0vdYb8mRxh1tGpD8b5ExnE3y8XwuCV nurd"
+      # NixOS key
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOAMRygHsDzFOKXtfuiufsRiLtg4Er4R8cElBB9p/etk nerd"
   ];
   sys = config.my.system;
   roles = config.my.roles;

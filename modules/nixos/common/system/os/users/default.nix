@@ -3,6 +3,7 @@
   # users that are not in users/<username>.nix don't get to be a real user
   imports = [
     ./main-user.nix
+    ./nerd-user.nix
     ./nix-builder.nix
     ./root.nix
   ];
