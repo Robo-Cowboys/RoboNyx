@@ -6,9 +6,9 @@
   inherit (lib) types;
   inherit (lib.options) mkOption;
 
-  env = config.my.usrEnv;
+  env = config.modules.usrEnv;
 in {
-  options.my.meta = {
+  options.modules.meta = {
     hostname = mkOption {
       type = types.str;
       default = config.networking.hostName;

@@ -22,23 +22,23 @@ in {
     #    ./emulation.nix
     ./virtualization.nix
     #
-    #    # package and program related options
+    # package and program related options
     ./services
-    #    ./programs
+    ./programs
     #
     #    # systemd-nspawn containers
     #    ./containers.nix
   ];
   config = {
     warnings =
-      (optionals (config.my.system.fs == []) [
+      (optionals (config.modules.system.fs == []) [
         ''
           You have not added any filesystems to be supported by your system. You may end up with an unbootable system!
 
           Consider setting {option}`config.modules.system.fs` in your configuration
         ''
       ])
-      ++ (optionals (config.my.system.users == []) [
+      ++ (optionals (config.modules.system.users == []) [
         ''
           You have not added any users to be supported by your system. You may end up with an unbootable system!
 
@@ -47,10 +47,10 @@ in {
       ]);
   };
 
-  options.my.system = {
+  options.modules.system = {
     mainUser = mkOption {
-      type = types.enum config.my.system.users;
-      default = builtins.elemAt config.my.system.users 0;
+      type = types.enum config.modules.system.users;
+      default = builtins.elemAt config.modules.system.users 0;
       description = ''
         The username of the main user for your system.
 

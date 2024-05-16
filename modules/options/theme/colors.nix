@@ -8,7 +8,7 @@
   inherit (lib.strings) removePrefix hasPrefix isString;
   inherit (lib.my) serializeTheme;
 
-  cfg = config.my.style;
+  cfg = config.modules.style;
 
   hexColorType = mkOptionType {
     name = "hex-color";
@@ -23,7 +23,7 @@
     then (import ./palettes/${slug}.nix).colorscheme.palette
     else throw "The following colorscheme was imported but not found: ${slug}";
 in {
-  options.my.style = {
+  options.modules.style = {
     # choose a colorscheme
     colorScheme = {
       # "Name Of The Scheme"

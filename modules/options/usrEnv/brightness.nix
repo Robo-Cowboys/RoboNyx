@@ -7,9 +7,9 @@
   inherit (lib.options) mkOption;
   inherit (lib.types) ints bool enum package;
 
-  cfg = config.my.usrEnv.brightness;
+  cfg = config.modules.usrEnv.brightness;
 in {
-  options.my.usrEnv.brightness = {
+  options.modules.usrEnv.brightness = {
     enable = mkOption {
       type = bool;
       default = false;

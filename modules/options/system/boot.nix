@@ -6,10 +6,10 @@
 }: let
   inherit (lib) literalExpression mkEnableOption mkOption types;
 
-  cfg = config.my.system.boot;
+  cfg = config.modules.system.boot;
 in {
   # pre-boot and bootloader configurations
-  options.my.system.boot = {
+  options.modules.system.boot = {
     enableKernelTweaks = mkEnableOption "security and performance related kernel parameters";
     recommendedLoaderConfig = mkEnableOption "tweaks for common bootloader configs per my liking";
     loadRecommendedModules = mkEnableOption "kernel modules that accommodate for most use cases";
@@ -30,7 +30,7 @@ in {
       mkEnableOption ''
         almost entirely silent boot process through `quiet` kernel parameter
       ''
-      // {default = config.my.system.boot.plymouth.enable;};
+      // {default = config.modules.system.boot.plymouth.enable;};
 
     initrd = {
       enableTweaks = mkEnableOption "quality of life tweaks for the initrd stage";

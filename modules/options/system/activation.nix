@@ -1,7 +1,7 @@
 {lib, ...}: let
   inherit (lib) mkEnableOption;
 in {
-  options.my.system.activation = {
+  options.modules.system.activation = {
     diffGenerations = mkEnableOption "diff view between rebuilds";
   };
 }
