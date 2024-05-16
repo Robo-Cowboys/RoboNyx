@@ -2,10 +2,8 @@
   lib,
   config,
   ...
-}: let
-  inherit (lib) mkIf;
-in {
-  config = mkIf config.modules.roles.microvm {
+}: {
+  config = {
     systemd.network.enable = true;
 
     # Enable the OpenSSH daemon.
