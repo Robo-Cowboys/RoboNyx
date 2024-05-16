@@ -2,10 +2,8 @@
   lib,
   config,
   ...
-}: let
-  inherit (lib) mkIf;
-in {
-  config = mkIf config.my.profiles.workstation.enable {
+}: {
+  config = {
     programs = {
       # allow users to mount fuse filesystems with allow_other
       fuse.userAllowOther = true;

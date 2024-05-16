@@ -2,10 +2,8 @@
   lib,
   config,
   ...
-}: let
-  inherit (lib) mkIf;
-in {
-  config = mkIf config.my.profiles.workstation.enable {
+}: {
+  config = {
     systemd = let
       extraConfig = ''
         DefaultTimeoutStartSec=15s

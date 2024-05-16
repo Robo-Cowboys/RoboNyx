@@ -5,7 +5,7 @@
 }: let
   inherit (lib) mkIf;
 in {
-  config = mkIf config.my.roles.iso {
+  config = mkIf config.modules.roles.iso {
     # attempt to fix "too many open files"
     security.pam.loginLimits = [
       {

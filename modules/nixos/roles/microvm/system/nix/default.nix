@@ -1,5 +1,5 @@
 _: {
-  #  config = mkIf config.my.roles.microvm {
+  #  config = mkIf config.modules.roles.microvm {
   #    nix = {
   #      settings.trusted-users = ["admin"];
   #      package = pkgs.nixUnstable;

@@ -5,7 +5,7 @@
 }: let
   inherit (lib) mkIf;
 in {
-  config = mkIf config.my.roles.microvm {
+  config = mkIf config.modules.roles.microvm {
     environment.pathsToLink = ["/share/zsh"];
     programs.zsh = {
       enable = true;

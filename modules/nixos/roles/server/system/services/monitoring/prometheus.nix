@@ -5,10 +5,10 @@
 }: let
   inherit (lib) mkIf;
 
-  sys = config.my.system;
+  sys = config.modules.system;
   cfg = sys.services;
 in {
-  config = mkIf (cfg.monitoring.prometheus.enabled && config.my.roles.server) {
+  config = mkIf (cfg.monitoring.prometheus.enabled && config.modules.roles.server) {
     services = {
       # Prometheus exporter for Grafana
       prometheus = {

@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  inherit (lib) mkForce mkIf;
+  inherit (lib) mkForce;
 in {
-  config = mkIf config.my.profiles.workstation.enable {
+  config = {
     #  # Firefox cache on tmpfs
     #  fileSystems."/home/sincore/.cache/mozilla/firefox" = {
     #    device = "tmpfs";

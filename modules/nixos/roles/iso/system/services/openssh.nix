@@ -5,7 +5,7 @@
 }: let
   inherit (lib.modules) mkIf;
 in {
-  config = mkIf config.my.roles.iso {
+  config = mkIf config.modules.roles.iso {
     # Hardened SSH configuration
     services.openssh = {
       extraConfig = ''
