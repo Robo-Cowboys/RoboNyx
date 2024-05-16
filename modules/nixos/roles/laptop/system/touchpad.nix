@@ -2,11 +2,8 @@
   lib,
   config,
   ...
-}: let
-  inherit (lib) mkIf;
-  inherit (config.my) roles;
-in {
-  config = mkIf roles.laptop {
+}:{
+  config = {
     services = {
       # Input settings for libinput
       xserver.libinput = {
