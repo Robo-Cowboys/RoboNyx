@@ -5,10 +5,9 @@
 }: let
   inherit (lib) mkIf;
 
-  roles = config.my.roles;
-  sys = config.my.system;
+  sys = config.modules.system;
 in {
-  config = mkIf roles.common {
+  config = {
     # port of https://gitlab.archlinux.org/archlinux/packaging/packages/realtime-privileges
     # see https://wiki.archlinux.org/title/Realtime_process_management
     # tldr: realtime processes have higher priority than normal processes

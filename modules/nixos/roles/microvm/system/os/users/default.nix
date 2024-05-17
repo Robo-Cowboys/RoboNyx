@@ -2,10 +2,8 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib) mkIf;
-in {
-  config = mkIf config.my.roles.microvm {
+}: {
+  config = {
     users.users.admin = {
       isNormalUser = true;
       extraGroups = ["wheel"];

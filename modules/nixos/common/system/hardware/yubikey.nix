@@ -6,10 +6,9 @@
 }: let
   inherit (lib) mkIf;
 
-  roles = config.my.roles;
-  yubikeySupport = config.my.system.yubikeySupport;
+  yubikeySupport = config.modules.system.yubikeySupport;
 in {
-  config = mkIf (yubikeySupport.enable && roles.common) {
+  config = mkIf (yubikeySupport.enable) {
     hardware.gpgSmartcards.enable = true;
 
     services = {

@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  inherit (lib.modules) mkForce mkIf;
+  inherit (lib) mkForce;
 in {
-  config = mkIf config.my.roles.iso {
+  config = {
     networking.networkmanager = {
       enable = true;
       plugins = mkForce [];

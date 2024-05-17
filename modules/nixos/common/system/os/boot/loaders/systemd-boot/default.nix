@@ -5,10 +5,9 @@
 }: let
   inherit (lib) mkDefault mkIf optionalAttrs;
 
-  cfg = config.my.system;
-  roles = config.my.roles;
+  cfg = config.modules.system;
 in {
-  config = mkIf (cfg.boot.loader == "systemd-boot" && roles.common) {
+  config = mkIf (cfg.boot.loader == "systemd-boot") {
     boot.loader = {
       systemd-boot =
         {

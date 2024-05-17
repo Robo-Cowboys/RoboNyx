@@ -3,9 +3,9 @@
   lib,
   ...
 }: let
-  inherit (lib) mkIf mkForce;
+  inherit (lib) mkForce;
 in {
-  config = mkIf config.my.roles.iso {
+  config = {
     nix = {
       settings = {
         experimental-features = [

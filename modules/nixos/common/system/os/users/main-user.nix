@@ -10,10 +10,9 @@
   keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICDSw8KwWzGDDks1fHSiuJO915PDXYdgKHpj+4+6XYrW sincore@jupiter"
   ];
-  sys = config.my.system;
-  roles = config.my.roles;
+  sys = config.modules.system;
 in {
-  config = mkIf roles.common {
+  config = {
     boot.initrd.network.ssh.authorizedKeys = keys;
 
     services.openssh = {

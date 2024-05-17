@@ -2,10 +2,8 @@
   lib,
   config,
   ...
-}: let
-  inherit (lib) mkIf;
-in {
-  config = mkIf config.my.profiles.workstation.enable {
+}: {
+  config = {
     # compress memory and store in RAM before swapping to disk
     boot.kernelParams = ["zswap.enabled=1"];
 

@@ -5,12 +5,11 @@
   lib,
   ...
 }: let
-  inherit (lib) mkIf;
 
   #TODO: This needs to go back in.
   #echo -e " █ ''${BWHITE}Configuration.:''${CO} ''${CAB}${self.rev or "\${BRED}(✘ )\${CO}\${BWHITE} Dirty"}''${CO}"
 in {
-  config = mkIf config.my.roles.headless {
+  config = {
     users.motd = let
       exec = package: program: "${package}/bin/${program}";
       util = exec pkgs.coreutils;

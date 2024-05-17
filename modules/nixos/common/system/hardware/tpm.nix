@@ -5,10 +5,9 @@
 }: let
   inherit (lib) mkIf mkDefault;
 
-  dev = config.my.device;
-  roles = config.my.roles;
+  dev = config.modules.device;
 in {
-  config = mkIf (dev.hasTPM && roles.common) {
+  config = mkIf (dev.hasTPM) {
     security.tpm2 = {
       # enable Trusted Platform Module 2 support
       enable = true;

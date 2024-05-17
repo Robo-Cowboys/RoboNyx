@@ -9,9 +9,8 @@
   inherit (lib.attrsets) filterAttrs mapAttrs;
   inherit (lib.modules) mkIf mkDefault;
 
-  roles = config.my.roles;
 in {
-  config = mkIf roles.common {
+  config = {
     system = {
       autoUpgrade.enable = false;
     };

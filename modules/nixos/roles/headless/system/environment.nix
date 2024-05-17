@@ -2,10 +2,8 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib) mkIf;
-in {
-  config = mkIf config.my.roles.headless {
+}: {
+  config = {
     environment = {
       # normally we wouldn't need any Xlibs on a headless server but for whatever reason
       # this affects whether or not some programs can build - such as pipewire

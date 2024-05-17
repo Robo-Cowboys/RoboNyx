@@ -6,10 +6,9 @@
 }: let
   inherit (lib) mkIf;
 
-  sys = config.my.system;
-  roles = config.my.roles;
+  sys = config.modules.system;
 in {
-  config = mkIf (sys.security.fprint.enable && roles.common) {
+  config = mkIf (sys.security.fprint.enable) {
     # fingerprint login
     # doesn't work because thanks drivers
     services.fprintd = {

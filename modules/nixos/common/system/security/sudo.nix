@@ -4,9 +4,8 @@
   ...
 }: let
   inherit (lib) mkIf mkForce mkDefault;
-  roles = config.my.roles;
 in {
-  config = mkIf roles.common {
+  config = {
     security = {
       # https://github.com/NixOS/nixpkgs/pull/256491
       # no nixpkgs, you are not breaking my system because of "muh rust" delusions again

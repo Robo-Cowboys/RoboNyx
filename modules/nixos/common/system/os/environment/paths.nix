@@ -2,12 +2,8 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib) mkIf;
-
-  roles = config.my.roles;
-in {
-  config = mkIf roles.common {
+}: {
+  config = {
     # enable completions for system packages
     # and other stuff
     environment.pathsToLink = [

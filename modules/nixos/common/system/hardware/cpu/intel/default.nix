@@ -6,10 +6,9 @@
 }: let
   inherit (lib) mkIf;
 
-  dev = config.my.device;
-  roles = config.my.roles;
+  dev = config.modules.device;
 in {
-  config = mkIf ((builtins.elem dev.cpu.type ["intel" "vm-intel"]) && roles.common) {
+  config = mkIf ((builtins.elem dev.cpu.type ["intel" "vm-intel"])) {
     hardware.cpu.intel.updateMicrocode = true;
     boot = {
       kernelModules = ["kvm-intel"];

@@ -5,11 +5,10 @@
 }: let
   inherit (lib) mkIf forEach;
 
-  sys = config.my.system;
-  cfg = config.my.system.impermanence;
-  roles = config.my.roles;
+  sys = config.modules.system;
+  cfg = config.modules.system.impermanence;
 in {
-  config = mkIf (cfg.enable && roles.common) {
+  config = mkIf (cfg.enable) {
     fileSystems."/etc/ssh" = {
       depends = ["/persistent"];
       neededForBoot = true;

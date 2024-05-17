@@ -3,11 +3,8 @@
   lib,
   pkgs,
   ...
-}: let
-  inherit (lib) mkIf;
-  roles = config.my.roles;
-in {
-  config = mkIf roles.common {
+}:{
+  config = {
     environment.variables = let
       qmlPackages = with pkgs; [
         plasma5Packages.qqc2-desktop-style

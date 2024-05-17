@@ -6,11 +6,10 @@
 }: let
   inherit (lib) mkIf;
 
-  sys = config.my.system;
-  env = config.my.usrEnv;
-  roles = config.my.roles;
+  sys = config.modules.system;
+  env = config.modules.usrEnv;
 in {
-  config = mkIf (sys.video.enable && roles.common) {
+  config = mkIf sys.video.enable {
     xdg.portal = {
       enable = true;
 

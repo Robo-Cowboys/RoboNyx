@@ -5,10 +5,9 @@
 }: let
   inherit (lib) mkIf;
 
-  common = config.my.roles.common;
-  cfg = config.my.system.encryption;
+  cfg = config.modules.system.encryption;
 in {
-  config = mkIf (cfg.enable && common) {
+  config = mkIf cfg.enable {
     boot = {
       # mildly improves performance for the disk encryption
       initrd.availableKernelModules = [

@@ -1,5 +1,7 @@
-_: {
+{
   imports = [
+    ./misc
+    ./services
     ./boot.nix
     ./environment.nix
     ./hardware.nix

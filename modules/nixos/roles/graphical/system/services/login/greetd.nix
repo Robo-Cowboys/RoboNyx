@@ -4,12 +4,12 @@
   lib,
   ...
 }: let
-  inherit (lib.modules) mkIf;
+  inherit (lib) mkIf;
   inherit (lib.strings) concatStringsSep;
   inherit (lib.meta) getExe;
 
-  env = config.my.usrEnv;
-  sys = config.my.system;
+  env = config.modules.usrEnv;
+  sys = config.modules.system;
 
   # make desktop session paths available to greetd
   sessionData = config.services.displayManager.sessionData.desktops;
@@ -35,7 +35,7 @@
     ];
   };
 in {
-  config = lib.mkIf config.my.roles.graphical {
+  config = {
     services.greetd = {
       enable = true;
       vt = 2;

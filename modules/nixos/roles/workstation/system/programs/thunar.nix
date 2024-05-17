@@ -3,10 +3,8 @@
   config,
   pkgs,
   ...
-}: let
-  inherit (lib) mkIf;
-in {
-  config = mkIf config.my.profiles.workstation.enable {
+}: {
+  config = {
     # the thunar file manager
     # we enable thunar here and add plugins instead of in systemPackages
     # it is enabled unconditionally as a relatively lightweight fallback

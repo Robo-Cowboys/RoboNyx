@@ -2,12 +2,8 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib.modules) mkIf;
-
-  roles = config.my.roles;
-in {
-  config = mkIf roles.common {
+}: {
+  config = {
     networking.firewall.allowedUDPPorts = [123];
 
     # free, easy-to-use implementation of the Network Time Protocol

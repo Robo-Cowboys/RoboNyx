@@ -6,10 +6,9 @@
 }: let
   inherit (lib) mkIf;
 
-  roles = config.my.roles;
-  virt = config.my.system.virtualization;
+  virt = config.modules.system.virtualization;
 in {
-  config = mkIf (virt.enable && virt.docker.enable && roles.common) {
+  config = mkIf (virt.enable && virt.docker.enable) {
     environment.systemPackages = with pkgs; [docker-compose];
     virtualisation.docker.enable = true;
   };

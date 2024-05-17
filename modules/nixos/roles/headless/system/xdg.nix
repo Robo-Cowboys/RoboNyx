@@ -3,9 +3,9 @@
   config,
   ...
 }: let
-  inherit (lib) mkForce mapAttrs mkIf;
+  inherit (lib) mkForce mapAttrs;
 in {
-  config = mkIf config.my.roles.headless {
+  config = {
     xdg = mapAttrs (_: mkForce) {
       sounds.enable = false;
       mime.enable = false;

@@ -4,9 +4,9 @@
   lib,
   ...
 }: let
-  inherit (lib) mkIf mapAttrs;
+  inherit (lib) mapAttrs;
 in {
-  config = mkIf config.my.profiles.workstation.enable {
+  config = {
     fonts = {
       enableDefaultPackages = false;
 

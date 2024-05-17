@@ -3,10 +3,8 @@
   config,
   pkgs,
   ...
-}: let
-  inherit (lib) mkIf;
-in {
-  config = mkIf config.my.profiles.workstation.enable {
+}: {
+  config = {
     # enable cups and add some drivers for common printers
     services = {
       printing = {

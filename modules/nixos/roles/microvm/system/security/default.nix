@@ -2,10 +2,8 @@
   lib,
   config,
   ...
-}: let
-  inherit (lib) mkIf;
-in {
-  config = mkIf config.my.roles.microvm {
+}: {
+  config =  {
     security.sudo.extraRules = [
       {
         users = ["admin"];

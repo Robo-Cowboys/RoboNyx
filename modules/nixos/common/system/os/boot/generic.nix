@@ -6,10 +6,9 @@
 }: let
   inherit (lib) mkDefault mkForce mkOverride mkMerge mkIf optionals;
 
-  sys = config.my.system;
-  roles = config.my.roles;
+  sys = config.modules.system;
 in {
-  config = mkIf roles.common {
+  config = {
     boot = {
       # kernel console loglevel
       consoleLogLevel = 3;

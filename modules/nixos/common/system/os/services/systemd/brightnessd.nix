@@ -4,14 +4,11 @@
   ...
 }: let
   inherit (lib) mkIf;
-  inherit (config) my;
 
   env = my.usrEnv;
-  roles = config.my.roles;
   cfg = env.brightness;
 in {
-  config = mkIf (cfg.enable
-    && roles.common) {
+  config = mkIf cfg.enable {
     systemd.services."system-brightnessd" = {
       description = "Automatic backlight management with systemd";
 

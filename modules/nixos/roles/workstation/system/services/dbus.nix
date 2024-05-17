@@ -3,10 +3,8 @@
   config,
   pkgs,
   ...
-}: let
-  inherit (lib) mkIf;
-in {
-  config = mkIf config.my.profiles.workstation.enable {
+}:{
+  config = {
     services.dbus = {
       enable = true;
       packages = with pkgs; [dconf gcr udisks2];

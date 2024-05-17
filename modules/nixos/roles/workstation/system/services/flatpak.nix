@@ -4,11 +4,11 @@
   ...
 }: let
   inherit (lib) mkIf;
-  inherit (config) my;
-  sys = my.system;
+  inherit (config) modules;
+  sys = modules.system;
   serv = sys.services;
 in {
-  config = mkIf (my.profiles.workstation.enable && serv.flatpak.enable) {
+  config = mkIf serv.flatpak.enable {
     services.flatpak.enable = true;
   };
 }

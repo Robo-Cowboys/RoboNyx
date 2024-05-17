@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./systemd
     ./fstrim.nix
     ./logrotate.nix
     ./ntpd.nix

@@ -3,10 +3,8 @@
   config,
   pkgs,
   ...
-}: let
-  inherit (lib) mkIf;
-in {
-  config = mkIf config.my.roles.microvm {
+}: {
+  config = {
     time.timeZone = "UTC";
     i18n.defaultLocale = "en_US.UTF-8";
 
