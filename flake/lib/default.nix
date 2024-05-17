@@ -9,14 +9,7 @@
   validators = import' ./validators.nix; # validate system conditions
   helpers = import' ./helpers; # helper functions
   hardware = import' ./hardware.nix; # hardware capability checks
-  xdg = import' ./xdg; # xdg user directories & templates
-
-  # abstractions over networking functions
-  # dag library is a modified version of the one found in
-  # rycee's NUR repository
-  dag = import' ./network/dag.nix; # dag is in network because it's designed for network only use
-  firewall = import' ./network/firewall.nix {inherit dag;}; # build nftables tables and chains
-  namespacing = import' ./network/namespacing.nix; # TODO
+#  xdg = import' ./xdg; # xdg user directories & templates
 
   # aliases for commonly used strings or functions
   aliases = import' ./aliases.nix;

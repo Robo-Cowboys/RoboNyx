@@ -11,9 +11,9 @@ in {
   # and can be built with `nix build .#images.<hostname>`
   # alternatively hosts can be built with `nix build .#nixosConfigurations.hostName.config.system.build.isoImage`
   flake.images = let
-    gaea = self.nixosConfigurations."gaea";
-    erebus = self.nixosConfigurations."erebus";
-    atlas = self.nixosConfigurations."atlas".extendModules {modules = [installerModule];};
+    installer = self.nixosConfigurations."installer";
+    airgap = self.nixosConfigurations."airgap";
+    raspberry = self.nixosConfigurations."raspberry".extendModules {modules = [installerModule];};
   in {
     # Installation iso
     installer = installer.config.system.build.isoImage;
