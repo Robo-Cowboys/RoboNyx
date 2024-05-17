@@ -4,7 +4,7 @@
   lib,
   ...
 }: let
-  inherit (lib.modules) mkIf;
+  inherit (lib) mkIf;
   inherit (lib.strings) concatStringsSep;
   inherit (lib.meta) getExe;
 
@@ -35,7 +35,7 @@
     ];
   };
 in {
-  config = lib.mkIf config.modules.roles.graphical {
+  config = {
     services.greetd = {
       enable = true;
       vt = 2;

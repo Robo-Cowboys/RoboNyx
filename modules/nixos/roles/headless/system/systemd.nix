@@ -2,10 +2,8 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib) mkIf;
-in {
-  config = mkIf config.modules.roles.headless {
+}: {
+  config = {
     # https://github.com/numtide/srvos/blob/main/nixos/server/default.nix
     systemd = {
       # given that our systems are headless, emergency mode is useless.

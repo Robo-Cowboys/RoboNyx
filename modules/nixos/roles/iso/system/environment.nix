@@ -5,10 +5,9 @@
   lib,
   ...
 }: let
-  inherit (lib) mkIf;
-  inherit (lib.modules) mkForce;
+  inherit (lib) mkForce;
 in {
-  config = mkIf config.modules.roles.iso {
+  config = {
     environment = {
       # our installer is a minimal, TUI-only environment. I don't find any
       # good reason to keep X11 libs around while we will not be depending

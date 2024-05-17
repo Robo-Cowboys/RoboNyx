@@ -3,10 +3,8 @@
   pkgs,
   lib,
   ...
-}: let
-  inherit (lib.modules) mkIf;
-in {
-  config = mkIf config.modules.roles.iso {
+}: {
+  config = {
     # console locale
     console = let
       variant = "u24n";

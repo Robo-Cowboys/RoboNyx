@@ -1,4 +1,4 @@
-_: {
+{
   imports = [
     ./environment.nix
     ./systemd.nix

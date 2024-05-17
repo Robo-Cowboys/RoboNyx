@@ -2,10 +2,8 @@
   lib,
   config,
   ...
-}: let
-  inherit (lib) mkIf;
-in {
-  config = mkIf config.modules.roles.graphical {
+}:{
+  config = {
     # unlock GPG keyring on login
     security.pam.services = let
       gnupg = {

@@ -3,5 +3,5 @@
     ./system
   ];
 
-  system.nixos.tags = ["graphical"];
+  system.nixos.tags = ["headless"];
 }
