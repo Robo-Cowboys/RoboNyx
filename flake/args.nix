@@ -22,7 +22,7 @@ in {
       {
         _module.args = {
           pkgs = config.legacyPackages;
-          pins = pinnedSources;
+#          pins = pinnedSources;
           keys = publicKeys;
         };
       }
@@ -39,7 +39,7 @@ in {
   };
 
   flake = {
-    pins = pinnedSources;
+#    pins = pinnedSources;
     keys = publicKeys;
   };
 }

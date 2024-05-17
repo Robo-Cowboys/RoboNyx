@@ -14,7 +14,7 @@
   # aliases for commonly used strings or functions
   aliases = import' ./aliases.nix;
 
-  importedLibs = [builders services validators helpers hardware aliases firewall namespacing dag xdg];
+  importedLibs = [builders services validators helpers hardware aliases];
   extendedLib = lib.extend (_: _: foldl recursiveUpdate {} importedLibs);
 in {
   perSystem = {
