@@ -3,8 +3,8 @@
   config,
   lib,
   ...
-}:{
-  config ={
+}: {
+  config = {
     programs.direnv = {
       enable = true;
 

@@ -2,7 +2,7 @@
   config,
   lib,
   ...
-}:{
+}: {
   config = {
     time = {
       timeZone = "America/New_York";

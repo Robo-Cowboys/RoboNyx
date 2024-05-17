@@ -58,44 +58,44 @@
       help = "Cherrypick changes and push them to 'upstream' branch.";
       name = "upstream";
       command = ''
-      # Add upstream repository if not already added
-      if ! git remote | grep -q upstream; then
-          git remote add upstream https://github.com/Spacebar-Cowboys/nyx.git
-      fi
+        # Add upstream repository if not already added
+        if ! git remote | grep -q upstream; then
+            git remote add upstream https://github.com/Spacebar-Cowboys/nyx.git
+        fi
 
-      # Fetch the latest changes from the upstream repository
-      git fetch upstream
+        # Fetch the latest changes from the upstream repository
+        git fetch upstream
 
-      # Checkout the main branch from your fork and update it
-      git checkout main
-      git pull origin main
+        # Checkout the main branch from your fork and update it
+        git checkout main
+        git pull origin main
 
-      # Create or checkout nyx-upstream and reset it to match the upstream main branch
-      git checkout -b nyx-upstream 2>/dev/null || git checkout nyx-upstream
-      git reset --hard upstream/main
+        # Create or checkout nyx-upstream and reset it to match the upstream main branch
+        git checkout -b nyx-upstream 2>/dev/null || git checkout nyx-upstream
+        git reset --hard upstream/main
 
-      # List commits in your fork's main that are not in the upstream main
-      # Exclude certain paths by filtering commits after generating the list
-      commits_to_cherry_pick=$(git log --format=%H main --not upstream/main | while read commit_hash; do
-          if [ -z "$(git diff --name-only $commit_hash^..$commit_hash | grep -E '^(homes/|systems/x86_64-linux/)')" ]; then
-              echo $commit_hash
-          fi
-      done)
+        # List commits in your fork's main that are not in the upstream main
+        # Exclude certain paths by filtering commits after generating the list
+        commits_to_cherry_pick=$(git log --format=%H main --not upstream/main | while read commit_hash; do
+            if [ -z "$(git diff --name-only $commit_hash^..$commit_hash | grep -E '^(homes/|systems/x86_64-linux/)')" ]; then
+                echo $commit_hash
+            fi
+        done)
 
-      # Cherry-pick these commits into the new branch
-      echo "$commits_to_cherry_pick" | while IFS= read -r commit_hash; do
-        git cherry-pick $commit_hash || {
-          # If cherry-pick fails, handle the conflict
-          echo "Cherry-pick conflict on commit $commit_hash, attempting to continue..."
-          git cherry-pick --continue || {
-            echo "Failed to continue cherry-picking, aborting..."
-            git cherry-pick --abort
-            break
+        # Cherry-pick these commits into the new branch
+        echo "$commits_to_cherry_pick" | while IFS= read -r commit_hash; do
+          git cherry-pick $commit_hash || {
+            # If cherry-pick fails, handle the conflict
+            echo "Cherry-pick conflict on commit $commit_hash, attempting to continue..."
+            git cherry-pick --continue || {
+              echo "Failed to continue cherry-picking, aborting..."
+              git cherry-pick --abort
+              break
+            }
           }
-        }
-      done
+        done
 
-      git push origin nyx-upstream --force
+        git push origin nyx-upstream --force
       '';
       category = "source control";
     }

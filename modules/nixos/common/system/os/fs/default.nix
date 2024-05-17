@@ -7,7 +7,7 @@
 
   sys = config.modules.system;
 in {
-  config = (mkMerge [
+  config = mkMerge [
     (mkIf (builtins.elem "btrfs" sys.fs) {
       # scrub btrfs devices
       services.btrfs.autoScrub = {
@@ -48,5 +48,5 @@ in {
         supportedFilesystems = ["ntfs"];
       };
     })
-  ]);
+  ];
 }

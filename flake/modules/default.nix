@@ -9,7 +9,6 @@ in {
     # those can be imported by adding this flake as an input and then importing the nixosModules.<moduleName>
     # i.e imports = [ inputs.nyx.nixosModules.steam-compat ]; or modules = [ inputs.nyx.nixosModules.steam-compat ];
     nixosModules = {
-
       # we do not want to provide a default module
       default = builtins.throw "There is no default module, sorry!";
     };

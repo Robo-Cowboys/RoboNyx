@@ -4,7 +4,6 @@
   ...
 }: let
   inherit (lib.modules) mkIf mkForce mkDefault;
-
 in {
   config = {
     services.openssh = {

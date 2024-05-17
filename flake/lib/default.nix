@@ -9,7 +9,7 @@
   validators = import' ./validators.nix; # validate system conditions
   helpers = import' ./helpers; # helper functions
   hardware = import' ./hardware.nix; # hardware capability checks
-#  xdg = import' ./xdg; # xdg user directories & templates
+  #  xdg = import' ./xdg; # xdg user directories & templates
 
   # aliases for commonly used strings or functions
   aliases = import' ./aliases.nix;

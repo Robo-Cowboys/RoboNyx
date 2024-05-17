@@ -5,7 +5,6 @@
   lib,
   ...
 }: let
-
   #TODO: This needs to go back in.
   #echo -e " █ ''${BWHITE}Configuration.:''${CO} ''${CAB}${self.rev or "\${BRED}(✘ )\${CO}\${BWHITE} Dirty"}''${CO}"
 in {

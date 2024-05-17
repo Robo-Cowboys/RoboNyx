@@ -3,8 +3,7 @@
   # pins can be updated via `npins update` in current directory
   # which will automatically bump all sources in the `npins`
   # directory.
-#  pinnedSources = import ./npins;
-
+  #  pinnedSources = import ./npins;
   # add a collection of SSH keys to the keys so that
   #  1. my public keys are more easily obtainable from outside
   #  2. it's easy to share key names and values internally especially
@@ -22,7 +21,7 @@ in {
       {
         _module.args = {
           pkgs = config.legacyPackages;
-#          pins = pinnedSources;
+          #          pins = pinnedSources;
           keys = publicKeys;
         };
       }
@@ -39,7 +38,7 @@ in {
   };
 
   flake = {
-#    pins = pinnedSources;
+    #    pins = pinnedSources;
     keys = publicKeys;
   };
 }

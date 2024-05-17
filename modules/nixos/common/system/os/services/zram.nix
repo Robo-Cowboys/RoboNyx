@@ -2,7 +2,7 @@
   config,
   lib,
   ...
-}:{
+}: {
   config = {
     # compress half of the ram to use as swap
     # basically, get more memory per memory

@@ -34,4 +34,3 @@ _: let
 in {
   inherit sslTemplate common;
 }
-

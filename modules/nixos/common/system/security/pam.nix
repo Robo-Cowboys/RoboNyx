@@ -2,7 +2,7 @@
   config,
   lib,
   ...
-}:{
+}: {
   config = {
     security = {
       pam = {

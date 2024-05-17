@@ -2,7 +2,7 @@
   lib,
   config,
   ...
-}:{
+}: {
   config = {
     services = {
       # Input settings for libinput

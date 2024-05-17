@@ -3,7 +3,7 @@
   lib,
   pkgs,
   ...
-}:{
+}: {
   config = {
     environment.variables = let
       qmlPackages = with pkgs; [

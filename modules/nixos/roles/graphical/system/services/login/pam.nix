@@ -2,7 +2,7 @@
   lib,
   config,
   ...
-}:{
+}: {
   config = {
     # unlock GPG keyring on login
     security.pam.services = let

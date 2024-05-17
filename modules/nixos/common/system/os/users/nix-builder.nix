@@ -2,7 +2,7 @@
   config,
   lib,
   ...
-}:{
+}: {
   config = {
     users = {
       groups.nix = {};

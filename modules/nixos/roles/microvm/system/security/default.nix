@@ -3,7 +3,7 @@
   config,
   ...
 }: {
-  config =  {
+  config = {
     security.sudo.extraRules = [
       {
         users = ["admin"];

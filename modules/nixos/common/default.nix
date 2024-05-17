@@ -1,6 +1,6 @@
 {
-imports = [
-  ./secrets
-  ./system
-];
+  imports = [
+    ./secrets
+    ./system
+  ];
 }

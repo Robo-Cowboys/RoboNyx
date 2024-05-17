@@ -8,7 +8,6 @@
   inherit (lib.types) isType;
   inherit (lib.attrsets) filterAttrs mapAttrs;
   inherit (lib.modules) mkIf mkDefault;
-
 in {
   config = {
     system = {

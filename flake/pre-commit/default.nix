@@ -5,7 +5,7 @@
     ./hooks/alejandra.nix
     ./hooks/exiftool.nix
     ./hooks/prettier.nix
-#    ./hooks/typos.nix
+    #    ./hooks/typos.nix
 
     # disabled hooks
     # ./hooks/git-cliff.nix

@@ -8,7 +8,7 @@
 
   dev = config.modules.device;
 in {
-  config = mkIf ((builtins.elem dev.cpu.type ["intel" "vm-intel"])) {
+  config = mkIf (builtins.elem dev.cpu.type ["intel" "vm-intel"]) {
     hardware.cpu.intel.updateMicrocode = true;
     boot = {
       kernelModules = ["kvm-intel"];

@@ -2,7 +2,7 @@
   lib,
   config,
   ...
-}:{
+}: {
   config = {
     # This enables non-free firmware on devices not recognized by `nixos-generate-config`.
     # Disabling this option will make the system unbootable if such devices are critical
