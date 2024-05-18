@@ -9,7 +9,6 @@
   sys = config.modules.system;
   cfg = config.modules.system.impermanence;
 in {
-
   imports = [
     inputs.impermanence.nixosModules.impermanence
   ];
