@@ -6,7 +6,6 @@
   inherit (lib) mkOption mkEnableOption types;
 in {
   imports = [
-    ./palettes
     ./gtk.nix
     ./qt.nix
     ./colors.nix

@@ -5,7 +5,7 @@
 }: let
   inherit (lib) mkIf;
 
-  env = my.usrEnv;
+  env = config.modules.usrEnv;
   cfg = env.brightness;
 in {
   config = mkIf cfg.enable {

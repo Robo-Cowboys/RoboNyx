@@ -1,4 +1,4 @@
-{...}: {
+{
   imports = [
     ./monitoring.nix
     ./networking.nix

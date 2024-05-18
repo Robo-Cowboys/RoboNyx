@@ -7,7 +7,7 @@
     # if lvm is enabled, then tell it to issue discards
     # (this is good for SSDs and has almost no downsides on HDDs, so
     # it's a good idea to enable it unconditionally)
-    environment.etc."lvm/lvm.conf".text = mkIf config.services.lvm.enable ''
+    environment.etc."lvm/lvm.conf".text = lib.mkIf config.services.lvm.enable ''
       devices {
         issue_discards = 1
       }

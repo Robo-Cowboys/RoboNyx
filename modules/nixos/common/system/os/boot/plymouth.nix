@@ -10,7 +10,7 @@
 
   cfg = config.modules.system.boot.plymouth;
 in {
-  config = cfg.enable {
+  config = mkIf cfg.enable {
     # configure plymouth theme
     # <https://github.com/adi1090x/plymouth-themes>
     boot.plymouth = let

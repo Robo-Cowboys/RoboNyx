@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   lib,
   ...
@@ -8,6 +9,11 @@
   sys = config.modules.system;
   cfg = config.modules.system.impermanence;
 in {
+
+  imports = [
+    inputs.impermanence.nixosModules.impermanence
+  ];
+
   config = mkIf (cfg.enable) {
     fileSystems."/etc/ssh" = {
       depends = ["/persistent"];

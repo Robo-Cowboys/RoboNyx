@@ -8,7 +8,7 @@
   sys = config.modules.system;
   cfg = sys.services;
 in {
-  config = mkIf cfg.monitoring.prometheus.enabled {
+  config = mkIf cfg.monitoring.prometheus.enable {
     services = {
       # Prometheus exporter for Grafana
       prometheus = {
