@@ -1,8 +1,11 @@
-{lib, user-inputs, ...}: let
+{
+  lib,
+  user-inputs,
+  ...
+}: let
   inherit (lib) fs;
 in {
-
-fs = rec {
+  fs = rec {
     ## Matchers for file kinds. These are often used with `readDir`.
     ## Example Usage:
     ## ```nix
@@ -31,7 +34,7 @@ fs = rec {
     get-file = path: "${user-inputs.src}/${path}";
   };
 
-#  getSecretFile = file: fs.get-file "secrets/${file}";
-#  getSSHKeyFiles = user:
-#    fs.get-files (fs.get-file "keys/${user}/ssh");
+  #  getSecretFile = file: fs.get-file "secrets/${file}";
+  #  getSSHKeyFiles = user:
+  #    fs.get-files (fs.get-file "keys/${user}/ssh");
 }

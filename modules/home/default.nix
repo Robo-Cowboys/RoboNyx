@@ -11,7 +11,7 @@ in {
   imports = [
     # imported home-manager modules
     #TODO: reenable this.
-#    self.homeManagerModules.gtklock # a home-manager module for gtklock, gotta upstream it eventually
+    #    self.homeManagerModules.gtklock # a home-manager module for gtklock, gotta upstream it eventually
 
     # home package sets
     ./packages

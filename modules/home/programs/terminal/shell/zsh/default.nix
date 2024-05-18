@@ -1,7 +1,4 @@
-{
-  config,
-  ...
-}:{
+{config, ...}: {
   imports = [
     ./aliases.nix
     ./init.nix

@@ -8,7 +8,6 @@
   inherit (osConfig) modules;
 
   env = modules.usrEnv;
-
   #TODO: @Max Check this for setup
 in {
   config = mkIf env.desktops.i3.enable {
