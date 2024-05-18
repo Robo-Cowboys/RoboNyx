@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf;
-  inherit (osConfig) my;
+  inherit (osConfig) modules;
 
-  prg = my.system.programs;
-  dev = my.device;
+  prg = modules.system.programs;
+  dev = modules.device;
 in {
   config = mkIf (prg.cli.enable && (builtins.elem dev.type ["server" "hybrid"])) {
     home.packages = with pkgs; [

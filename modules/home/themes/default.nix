@@ -1,4 +1,4 @@
-{...}: {
+{
   imports = [
     ./global.nix
     ./gtk.nix

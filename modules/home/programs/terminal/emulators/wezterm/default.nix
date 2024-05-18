@@ -5,17 +5,17 @@
   ...
 }: let
   inherit (lib) mkIf;
-  inherit (osConfig) my;
-  #  inherit (my.style.colorScheme) colors;
+  inherit (osConfig) modules;
+  inherit (modules.style.colorScheme) colors;
 
-  dev = my.device;
+  dev = modules.device;
   acceptedTypes = ["laptop" "desktop" "hybrid"];
 in {
   config = mkIf (builtins.elem dev.type acceptedTypes) {
     programs.wezterm = {
       enable = true;
       package = pkgs.wezterm;
-      #      colorSchemes = import ./colorSchemes.nix {inherit colors;};
+      colorSchemes = import ./colorSchemes.nix {inherit colors;};
       extraConfig = ''
         local wez = require("wezterm")
         local act = wezterm.action

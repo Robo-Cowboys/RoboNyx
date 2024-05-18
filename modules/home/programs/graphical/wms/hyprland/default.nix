@@ -1,13 +1,13 @@
 {
   pkgs,
-  inputs,
+  inputs',
   lib,
   osConfig,
   ...
 }: let
   inherit (lib) mkIf;
-  inherit (osConfig) my;
-  inherit (import ./packages/packages.nix {inherit inputs pkgs;}) grimblast dbus-hyprland-env hyprpicker wrapper hyprshot;
+  inherit (osConfig) modules;
+  inherit (import ./packages {inherit inputs' pkgs;}) grimblast dbus-hyprland-env hyprpicker wrapper hyprshot;
 in {
   imports = [
     ./config/binds.nix
@@ -21,9 +21,9 @@ in {
     ./config/windowrules.nix
   ];
 
-  config = mkIf (lib.my.isWayland osConfig) {
+  config = mkIf (lib.isWayland osConfig) {
     home.packages = [
-      inputs.hyprland.packages.${pkgs.system}.hyprland
+      inputs'.hyprland.packages.hyprland
       hyprshot
       grimblast
       hyprpicker

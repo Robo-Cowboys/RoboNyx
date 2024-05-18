@@ -6,9 +6,9 @@
 }: let
   inherit (lib.modules) mkIf mkMerge;
 
-  dev = osConfig.my.device;
-  sys = osConfig.my.system;
-  cfg = osConfig.my.style;
+  dev = osConfig.modules.device;
+  sys = osConfig.modules.system;
+  cfg = osConfig.modules.style;
 
   acceptedTypes = ["laptop" "desktop" "hybrid" "lite"];
 in {

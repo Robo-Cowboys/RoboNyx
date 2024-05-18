@@ -7,8 +7,8 @@
 }: let
   inherit (pkgs) makeDesktopItem;
   inherit (lib) mkIf;
-  inherit (osConfig) my;
-  sys = my.system;
+  inherit (osConfig) modules;
+  sys = modules.system;
   prg = sys.programs;
 
   # runs processes as systemd transient services

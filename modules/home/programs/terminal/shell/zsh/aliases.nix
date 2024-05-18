@@ -1,6 +1,5 @@
 {
   pkgs,
-  host,
   config,
   ...
 }: let
@@ -78,8 +77,8 @@ in {
       # Nixos
       ns = "nix-shell --run zsh";
       nix-shell = "nix-shell --run zsh";
-      nix-switch = "sudo nixos-rebuild switch --flake ~/nyx#${host}";
-      nix-switchu = "sudo nixos-rebuild switch --upgrade --flake ~/nyx#${host}";
+#      nix-switch = "sudo nixos-rebuild switch --flake ~/nyx#${host}";
+#      nix-switchu = "sudo nixos-rebuild switch --upgrade --flake ~/nyx#${host}";
       nix-flake-update = "sudo nix flake update ~/nyx#";
       nix-clean = "sudo nix-collect-garbage && sudo nix-collect-garbage -d && sudo rm /nix/var/nix/gcroots/auto/* && nix-collect-garbage && nix-collect-garbage -d";
       # nix-clean = "sudo nix-collect-garbage -d";

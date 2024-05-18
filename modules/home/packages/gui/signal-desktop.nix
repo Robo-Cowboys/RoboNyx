@@ -4,11 +4,9 @@
   lib,
   ...
 }: let
-  inherit (lib.modules) mkIf;
-  inherit (lib) getExe;
-  inherit (lib.my) isWayland mkHyprlandService;
-  inherit (osConfig) my;
-  sys = my.system;
+  inherit (lib) mkIf getExe isWayland mkHyprlandService;
+  inherit (osConfig) modules;
+  sys = modules.system;
   prg = sys.programs;
 
   waylandFlags =

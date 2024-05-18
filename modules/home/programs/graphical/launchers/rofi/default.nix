@@ -6,12 +6,12 @@
   ...
 }: let
   inherit (lib) mkIf;
-  inherit (osConfig) my;
-  sys = my.system;
+  inherit (osConfig) modules;
+  sys = modules.system;
   prg = sys.programs;
 
   rofiPackage = with pkgs;
-    if (lib.my.isWayland osConfig)
+    if (lib.isWayland osConfig)
     then rofi-wayland
     else rofi;
 in {
@@ -48,7 +48,7 @@ in {
       };
 
       theme = let
-        inherit (osConfig.my.style.colorScheme) colors;
+        inherit (osConfig.modules.style.colorScheme) colors;
         inherit (config.lib.formats.rasi) mkLiteral;
       in {
         "*" = {

@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-  env = osConfig.my.usrEnv;
+  env = osConfig.modules.usrEnv;
 in {
   # assume system is headless if desktop is not set
   config = lib.mkIf (env.desktop != "") {

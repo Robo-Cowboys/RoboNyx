@@ -8,5 +8,5 @@
 in
   pkgs.writeShellScriptBin "hyprland" ''
     ${builtins.readFile ./session.sh}
-    ${getExe' hyprland.packages.${pkgs.system}.default "Hyprland"} $@
+    ${getExe' hyprland.packages.default "Hyprland"} $@
   ''

@@ -4,7 +4,7 @@
   ...
 }: let
   # theming
-  inherit (osConfig.my.style.colorScheme) colors;
+  inherit (osConfig.modules.style.colorScheme) colors;
 in {
   config = {
     wayland.windowManager.hyprland.settings = {

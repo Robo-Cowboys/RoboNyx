@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf;
-  inherit (osConfig) my;
-  inherit (my.style.colorScheme) colors;
+  inherit (osConfig) modules;
+  inherit (modules.style.colorScheme) colors;
 
-  dev = my.device;
+  dev = modules.device;
   acceptedTypes = ["desktop" "laptop" "lite" "hybrid"];
 in {
   config = mkIf (builtins.elem dev.type acceptedTypes) {

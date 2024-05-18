@@ -5,9 +5,9 @@
   ...
 }: let
   inherit (lib) mkIf;
-  inherit (osConfig) my;
+  inherit (osConfig) modules;
 
-  sys = my.system;
+  sys = modules.system;
   prg = sys.programs;
 in {
   config = mkIf prg.libreoffice.enable {

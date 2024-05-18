@@ -5,9 +5,9 @@
   ...
 }: let
   inherit (lib) mkIf;
-  inherit (osConfig) my;
+  inherit (osConfig) modules;
 
-  prg = my.system.programs;
+  prg = modules.system.programs;
 in {
   config = mkIf prg.cli.enable {
     home.packages = with pkgs; [

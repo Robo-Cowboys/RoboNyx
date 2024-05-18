@@ -6,15 +6,15 @@
   ...
 }: let
   inherit (lib) mkIf;
-  inherit (lib.my) isWayland mkHyprlandService;
-  inherit (osConfig) my;
-  monitors = my.device.monitors;
-  env = my.usrEnv;
+  inherit (lib) isWayland mkHyprlandService;
+  inherit (osConfig) modules;
+  monitors = modules.device.monitors;
+  env = modules.usrEnv;
 
   hyprpaper = inputs.hyprpaper.packages.${pkgs.system}.default;
   wallpkgs = inputs.wallpkgs.packages.${pkgs.system};
 in {
-  config = mkIf ((isWayland osConfig) && (env.desktops.wallpaperService == "hyprpaper")) {
+  config = mkIf ((isWayland osConfig) && (env.wallpaperService == "hyprpaper")) {
     systemd.user.services.hyprpaper = mkHyprlandService {
       Unit.Description = "Hyprland wallpaper daemon";
       Service = {

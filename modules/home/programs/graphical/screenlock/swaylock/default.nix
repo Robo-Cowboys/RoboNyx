@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf;
-  inherit (osConfig) my;
-  inherit (osConfig.my.style.colorScheme) colors;
+  inherit (osConfig) modules;
+  inherit (osConfig.modules.style.colorScheme) colors;
 
-  env = my.usrEnv;
+  env = modules.usrEnv;
 in {
   config = mkIf env.programs.screenlock.swaylock.enable {
     programs.swaylock = {

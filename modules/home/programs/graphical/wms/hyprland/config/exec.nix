@@ -1,8 +1,8 @@
 {osConfig, ...}: let
-  inherit (osConfig) my;
+  inherit (osConfig) modules;
 
   # theming
-  inherit (my.style) pointerCursor;
+  inherit (modules.style) pointerCursor;
 in {
   config = {
     wayland.windowManager.hyprland.settings = {

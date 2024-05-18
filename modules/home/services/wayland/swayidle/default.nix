@@ -7,7 +7,7 @@
 }: let
   inherit (lib) getExe mkIf;
 
-  env = osConfig.my.usrEnv;
+  env = osConfig.modules.usrEnv;
   locker = getExe env.programs.screenlock.package;
 in {
   config = mkIf (env.desktop == "Hyprland") {

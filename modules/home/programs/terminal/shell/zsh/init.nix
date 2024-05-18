@@ -1,11 +1,11 @@
 {
   lib,
-  config,
+  osConfig,
   ...
 }: let
   inherit (builtins) readFile;
   inherit (lib.strings) fileContents;
-  inherit (lib.my.theme) colors;
+  inherit (osConfig.modules.style.colorScheme) colors;
 in {
   config = {
     programs.zsh = {
@@ -18,18 +18,18 @@ in {
            --color gutter:-1
             --color bg:-1
             --color bg+:-1
-            --color fg:#${colors.subtext1}
-            --color fg+:#${colors.rosewater}
-            --color hl:#${colors.blue}
-            --color hl+:#${colors.blue}
-            --color header:#${colors.blue}
-            --color info:#${colors.yellow}
-            --color marker:#${colors.teal}
-            --color pointer:#${colors.teal}
-            --color prompt:#${colors.yellow}
-            --color spinner:#${colors.teal}
-            --color preview-bg:#${colors.mantle}
-            --color preview-fg:#${colors.blue}
+            --color fg:${colors.base05}
+            --color fg+:${colors.base06}
+            --color hl:${colors.base0D}
+            --color hl+:${colors.base0D}
+            --color header:${colors.base0D}
+            --color info:${colors.base0A}
+            --color marker:${colors.base0C}
+            --color pointer:${colors.base0C}
+            --color prompt:${colors.base0A}
+            --color spinner:${colors.base0C}
+            --color preview-bg:${colors.base01}
+            --color preview-fg:${colors.base0D}
             --prompt ' '
             --pointer ''
             --layout=reverse

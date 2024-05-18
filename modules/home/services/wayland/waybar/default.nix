@@ -6,14 +6,14 @@
   ...
 }: let
   inherit (lib) mkIf;
-  inherit (osConfig.my.style.colorScheme) slug colors;
+  inherit (osConfig.modules.style.colorScheme) slug colors;
 
-  env = osConfig.my.usrEnv;
+  env = osConfig.modules.usrEnv;
 
   waybar_config = import ./presets/${slug}/settings.nix {inherit osConfig config lib pkgs;};
   waybar_style = import ./presets/${slug}/style.nix {inherit colors;};
 in {
-  config = mkIf (env.wayland.statusBar.waybar.enable && (lib.my.isWayland osConfig)) {
+  config = mkIf (env.wayland.statusBar.waybar.enable && (lib.isWayland osConfig)) {
     programs.waybar = {
       enable = true;
       systemd.enable = true;

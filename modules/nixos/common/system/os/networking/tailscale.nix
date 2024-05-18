@@ -26,16 +26,17 @@ in {
           allowedUDPPorts = [config.services.tailscale.port];
         };
       }
-      (mkIf cfg.autoConnect {
-        sops.secrets."${key}" = {
-          sopsFile =
-            lib.my.getSecretFile
-            "tailscale/default.yaml";
-          owner = config.users.users.root.name;
-          reloadUnits = ["tailscale-autoconnect.service"];
-        };
-        # Autoconnect
-        services.tailscale.authKeyFile = config.sops.secrets."${key}".path;
-      })
+      #TODO: Fix this.
+#      (mkIf cfg.autoConnect {
+#        sops.secrets."${key}" = {
+#          sopsFile =
+#            lib.fs.get-file
+#            "secrets/tailscale/default.yaml";
+#          owner = config.users.users.root.name;
+#          reloadUnits = ["tailscale-autoconnect.service"];
+#        };
+#        # Autoconnect
+#        services.tailscale.authKeyFile = config.sops.secrets."${key}".path;
+#      })
     ]);
 }

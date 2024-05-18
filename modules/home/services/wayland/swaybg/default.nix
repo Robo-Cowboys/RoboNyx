@@ -6,13 +6,13 @@
   ...
 }: let
   inherit (lib) mkIf getExe;
-  inherit (osConfig) my;
-  inherit (lib.my) isWayland mkHyprlandService;
+  inherit (osConfig) modules;
+  inherit (lib) isWayland mkHyprlandService;
 
-  env = my.usrEnv;
+  env = modules.usrEnv;
   wallpkgs = inputs.wallpkgs.packages.${pkgs.system};
 in {
-  config = mkIf ((isWayland osConfig) && (env.desktops.wallpaperService == "swaybg")) {
+  config = mkIf ((isWayland osConfig) && (env.wallpaperService == "swaybg")) {
     systemd.user.services = {
       swaybg = mkHyprlandService {
         Unit.Description = "Wallpaper chooser service";

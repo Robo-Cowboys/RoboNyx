@@ -6,8 +6,8 @@
   ...
 }: let
   inherit (lib) mkIf;
-  inherit (osConfig.my) device;
-  cfg = osConfig.my.style;
+  inherit (osConfig.modules) device;
+  cfg = osConfig.modules.style;
 
   acceptedTypes = ["laptop" "desktop" "hybrid" "lite"];
 in {
@@ -28,7 +28,7 @@ in {
         GTK_THEME = "${cfg.gtk.theme.name}";
 
         # gtk applications should use filepickers specified by xdg
-        GTK_USE_PORTAL = "${toString (lib.my.boolToNum cfg.gtk.usePortal)}";
+        GTK_USE_PORTAL = "${toString (lib.boolToNum cfg.gtk.usePortal)}";
       };
     };
 

@@ -1,5 +1,5 @@
 {osConfig, ...}: let
-  cfg = osConfig.my.style;
+  cfg = osConfig.modules.style;
 in {
   # cursor theme
   home = {

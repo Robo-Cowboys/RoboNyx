@@ -6,8 +6,8 @@
 }: let
   inherit (lib) mkIf concatStringsSep;
   inherit (lib.lists) optionals;
-  inherit (osConfig) my;
-  sys = my.system;
+  inherit (osConfig) modules;
+  sys = modules.system;
   prg = sys.programs;
 in {
   config = mkIf prg.chromium.enable {
@@ -70,7 +70,7 @@ in {
             "--disable-speech-api"
             "--disable-speech-synthesis-api"
           ]
-          ++ optionals (lib.my.isWayland osConfig) [
+          ++ optionals (lib.isWayland osConfig) [
             # Wayland
 
             # Disabled because hardware acceleration doesn't work

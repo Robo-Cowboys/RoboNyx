@@ -4,11 +4,10 @@
   lib,
   ...
 }: let
-  inherit (lib.modules) mkIf;
-  inherit (lib.my) isWayland;
-  inherit (osConfig) my;
-  inherit (my.style.colorScheme) colors;
-  sys = my.system;
+  inherit (lib) mkIf isWayland;
+  inherit (osConfig) modules;
+  inherit (modules.style.colorScheme) colors;
+  sys = modules.system;
   prg = sys.programs;
 in {
   config = mkIf (prg.gui.enable && (isWayland osConfig)) {

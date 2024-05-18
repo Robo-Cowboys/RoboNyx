@@ -6,15 +6,15 @@
 }: let
   inherit (lib) mkIf;
   inherit (lib.lists) optionals;
-  inherit (osConfig) my;
-  sys = my.system;
+  inherit (osConfig) modules;
+  sys = modules.system;
   prg = sys.programs;
 in {
   config = mkIf prg.google-chrome.enable {
     programs.google-chrome = {
       enable = true;
       package = pkgs.google-chrome;
-      commandLineArgs = optionals (lib.my.isWayland osConfig) [
+      commandLineArgs = optionals (lib.isWayland osConfig) [
         # Wayland
 
         # Disabled because hardware acceleration doesn't work

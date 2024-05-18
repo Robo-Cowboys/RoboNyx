@@ -5,10 +5,10 @@
   ...
 }: let
   inherit (lib) mkIf;
-  inherit (osConfig) my;
+  inherit (osConfig) modules;
 
-  sys = my.system;
-  profile = my.profiles;
+  sys = modules.system;
+  profile = modules.profiles;
   serv = sys.services;
 in {
   imports = [

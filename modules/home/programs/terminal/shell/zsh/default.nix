@@ -1,12 +1,7 @@
 {
   config,
-  lib,
   ...
-}: let
-  inherit (lib) mkEnableOption;
-in {
-  options.my.home.has.zsh.enabled = mkEnableOption "zsh";
-
+}:{
   imports = [
     ./aliases.nix
     ./init.nix
