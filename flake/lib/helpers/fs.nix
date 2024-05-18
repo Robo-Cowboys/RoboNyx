@@ -1,9 +1,10 @@
 {
   lib,
-  user-inputs,
+  self,
   ...
 }: let
   inherit (lib) fs;
+  inherit (self) globals;
 in {
   fs = rec {
     ## Matchers for file kinds. These are often used with `readDir`.
@@ -31,10 +32,10 @@ in {
     ## "/user-source/systems"
     ## ```
     #@ Path -> Path
-    get-file = path: "${user-inputs.src}/${path}";
+    get-file = path: "${globals.flakeRoot}/${path}";
   };
 
-  #  getSecretFile = file: fs.get-file "secrets/${file}";
+    getSecretFile = file: fs.get-file "secrets/${file}";
   #  getSSHKeyFiles = user:
   #    fs.get-files (fs.get-file "keys/${user}/ssh");
 }

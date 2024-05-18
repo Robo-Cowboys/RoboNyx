@@ -27,16 +27,16 @@ in {
         };
       }
       #TODO: Fix this.
-      #      (mkIf cfg.autoConnect {
-      #        sops.secrets."${key}" = {
-      #          sopsFile =
-      #            lib.fs.get-file
-      #            "secrets/tailscale/default.yaml";
-      #          owner = config.users.users.root.name;
-      #          reloadUnits = ["tailscale-autoconnect.service"];
-      #        };
-      #        # Autoconnect
-      #        services.tailscale.authKeyFile = config.sops.secrets."${key}".path;
-      #      })
+            (mkIf cfg.autoConnect {
+              sops.secrets."${key}" = {
+                sopsFile =
+                  lib.getSecretFile
+                  "tailscale/default.yaml";
+                owner = config.users.users.root.name;
+                reloadUnits = ["tailscale-autoconnect.service"];
+              };
+              # Autoconnect
+              services.tailscale.authKeyFile = config.sops.secrets."${key}".path;
+            })
     ]);
 }

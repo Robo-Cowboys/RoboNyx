@@ -1,9 +1,11 @@
 {
+  self,
   config,
   lib,
   ...
 }: let
   inherit (lib) optionals mkEnableOption mkOption types;
+  inherit (self) globals;
 in {
   imports = [
     #    # configuration options for nixos activation scripts
@@ -60,7 +62,7 @@ in {
 
     users = mkOption {
       type = with types; listOf str;
-      default = ["sincore"];
+      default = [globals.mainUser];
       description = "A list of home-manager users on the system.";
     };
 
