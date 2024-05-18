@@ -5,6 +5,6 @@
 }: {
   config = {
     # disable sound related programs
-    sound.enable = mkForce false;
+    sound.enable = lib.mkForce false;
   };
 }
