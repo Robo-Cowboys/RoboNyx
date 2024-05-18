@@ -3,7 +3,7 @@
   osConfig,
   ...
 }: let
-  git = osConfig.modules.system.git;
+  git = osConfig.modules.system.programs.git;
 in {
   imports = [
     ./ignore.nix

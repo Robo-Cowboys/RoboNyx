@@ -6,7 +6,7 @@
   config = {
     services = {
       # Input settings for libinput
-      xserver.libinput = {
+      libinput = {
         # enable libinput
         enable = true;
 
