@@ -1,12 +1,5 @@
 {
-  perSystem = {
-    self',
-    config,
-    lib,
-    pkgs,
-    ...
-  }: {
-
+  perSystem = _: {
     just-flake.features.build = {
       enable = true;
       justfile = ''
