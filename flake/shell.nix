@@ -1,8 +1,12 @@
 {inputs, ...}: {
   imports = [
     inputs.treefmt-nix.flakeModule
-    inputs.just-flake.flakeModule
     inputs.pre-commit-hooks-nix.flakeModule
+
+    inputs.just-flake.flakeModule
+    ./shell/just/switch.nix
+    ./shell/just/boot.nix
+    ./shell/just/tree-fmt.nix #tree fmt command
   ];
 
   perSystem = {
@@ -10,14 +14,9 @@
     config,
     ...
   }: {
-    just-flake.features = {
-      treefmt.enable = true;
-    };
-
     # Add your auto-formatters here.
     # cf. https://numtide.github.io/treefmt/
     treefmt.config = {
-      #            projectRootFile = "flake.nix";
       flakeCheck = false; # pre-commit-hooks.nix checks this
       programs = {
         alejandra.enable = true;
@@ -33,16 +32,6 @@
         taplo.enable = true;
         shfmt.enable = true;
         prettier.enable = true;
-      };
-    };
-
-    pre-commit = {
-      check.enable = true;
-      settings = {
-        excludes = ["flake.lock" "r'.+\.age$'" "r'.+\.sh$'"];
-        hooks = {
-          treefmt.enable = true;
-        };
       };
     };
 

@@ -1,7 +1,4 @@
-{
-  config,
-  ...
-}: let
+{config, ...}: let
   sys = config.modules.system;
 in {
   # variables that I want to set globally on all systems
