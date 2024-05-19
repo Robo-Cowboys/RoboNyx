@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}: {
+{config, ...}: {
   config = {
     # we use networkmanager manage network devices locally
     networking.networkmanager = {

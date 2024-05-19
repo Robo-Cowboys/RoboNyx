@@ -1,5 +1,5 @@
 {
-  perSystem = {pkgs, ...}: {
+  perSystem = _: {
     just-flake.features.hello = {
       enable = true;
       justfile = ''

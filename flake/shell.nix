@@ -6,6 +6,7 @@
     inputs.just-flake.flakeModule
     ./shell/just/switch.nix
     ./shell/just/boot.nix
+    ./shell/just/build.nix
     ./shell/just/tree-fmt.nix #tree fmt command
   ];
 
