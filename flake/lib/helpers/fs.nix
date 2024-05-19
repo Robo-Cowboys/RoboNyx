@@ -34,7 +34,7 @@ in {
     get-file = path: "${globals.flakeRoot}/${path}";
   };
 
-    getSecretFile = file: "${globals.flakeRoot}/secrets/${file}";
+  getSecretFile = file: "${globals.flakeRoot}/secrets/${file}";
   #  getSSHKeyFiles = user:
   #    fs.get-files (fs.get-file "keys/${user}/ssh");
 }

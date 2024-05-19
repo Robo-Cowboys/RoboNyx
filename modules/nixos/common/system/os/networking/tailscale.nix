@@ -29,15 +29,15 @@ in {
         };
       }
       #TODO: Fix this.
-            (mkIf cfg.autoConnect {
-              sops.secrets."${key}" = {
-                sopsFile =
-                  (lib.traceVal(globals.flakeRoot + "/secrets/tailscale/default.yaml"));
-                owner = config.users.users.root.name;
-                reloadUnits = ["tailscale-autoconnect.service"];
-              };
-              # Autoconnect
-              services.tailscale.authKeyFile = config.sops.secrets."${key}".path;
-            })
+      (mkIf cfg.autoConnect {
+        sops.secrets."${key}" = {
+          sopsFile =
+            lib.traceVal (globals.flakeRoot + "/secrets/tailscale/default.yaml");
+          owner = config.users.users.root.name;
+          reloadUnits = ["tailscale-autoconnect.service"];
+        };
+        # Autoconnect
+        services.tailscale.authKeyFile = config.sops.secrets."${key}".path;
+      })
     ]);
 }
