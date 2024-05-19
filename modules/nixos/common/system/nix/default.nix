@@ -67,7 +67,7 @@ in {
     # set up garbage collection to run weekly,
     # removing unused packages that are older than 30 days
     gc = {
-      automatic = true;
+      automatic = false;
       dates = "Sat *-*-* 03:00";
       options = "--delete-older-than 30d";
     };
