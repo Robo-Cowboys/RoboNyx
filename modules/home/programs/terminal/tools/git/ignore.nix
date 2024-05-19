@@ -29,6 +29,8 @@
   nix = ''
     result
     result-*
+    .pre-commit-config.yaml
+    just-flake.just
     .direnv/
   '';
 
