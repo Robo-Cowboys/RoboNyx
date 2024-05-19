@@ -1,41 +1,45 @@
-{
-  perSystem = {
-    inputs',
-    config,
-    pkgs,
-    ...
-  }: {
-    devShells.default = pkgs.mkShellNoCC {
-      name = "nyx";
-      meta.description = "The default development shell for my NixOS configuration";
+{ inputs, config, pkgs, lib, system, ... }: {
+  imports = [
+           inputs.treefmt-nix.flakeModule
+            inputs.just-flake.flakeModule
+            inputs.pre-commit-hooks-nix.flakeModule
+  ];
 
-      shellHook = ''
-        ${config.pre-commit.installationScript}
-      '';
+  perSystem = {pkgs, config, ...}: {
+          just-flake.features = {
+            treefmt.enable = true;
+            convco.enable = true;
+          };
 
-      # tell direnv to shut up
-      DIRENV_LOG_FORMAT = "";
+          # Add your auto-formatters here.
+          # cf. https://numtide.github.io/treefmt/
+          treefmt.config = {
+            projectRootFile = "flake.nix";
+            flakeCheck = false; # pre-commit-hooks.nix checks this
+            programs = {
+              nixpkgs-fmt.enable = true;
+            };
+          };
 
-      # packages available in the dev shell
-      inputsFrom = [config.treefmt.build.devShell];
-      packages = with pkgs; [
-        #        (inputs'.agenix.packages.default.override {ageBin = "${pkgs.rage}/bin/rage";}) # provide agenix CLI within flake shell
-        inputs'.deploy-rs.packages.default # provide deploy-rs CLI within flake shell
-        config.treefmt.build.wrapper # treewide formatter
-        nil # nix ls
-        alejandra # nix formatter
-        git # flakes require git, and so do I
-        glow # markdown viewer
-        statix # lints and suggestions
-        deadnix # clean up unused nix code
-        nodejs # for ags and eslint_d
-        (pkgs.writeShellApplication {
-          name = "update";
-          text = ''
-            nix flake update && git commit flake.lock -m "flake: bump inputs"
-          '';
-        })
-      ];
-    };
+          pre-commit = {
+            check.enable = true;
+            settings = {
+              hooks = {
+                treefmt.enable = true;
+                convco.enable = true;
+              };
+            };
+          };
+
+          devShells.default = pkgs.mkShell {
+            inputsFrom = [
+              config.treefmt.build.devShell
+              config.just-flake.outputs.devShell
+              config.pre-commit.devShell
+            ];
+            packages = [
+              config.pre-commit.settings.tools.convco
+            ];
+          };
   };
 }
