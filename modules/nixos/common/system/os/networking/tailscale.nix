@@ -1,9 +1,11 @@
 {
   lib,
+  self,
   config,
   pkgs,
   ...
 }: let
+  inherit (self) globals;
   inherit (lib) mkIf mkMerge optional;
   inherit (config.services) tailscale;
   cfg = config.modules.system.networking.tailscale;
@@ -27,16 +29,15 @@ in {
         };
       }
       #TODO: Fix this.
-#            (mkIf cfg.autoConnect {
-#              sops.secrets."${key}" = {
-#                sopsFile =
-#                  lib.getSecretFile
-#                  "tailscale/default.yaml";
-#                owner = config.users.users.root.name;
-#                reloadUnits = ["tailscale-autoconnect.service"];
-#              };
-#              # Autoconnect
-#              services.tailscale.authKeyFile = config.sops.secrets."${key}".path;
-#            })
+            (mkIf cfg.autoConnect {
+              sops.secrets."${key}" = {
+                sopsFile =
+                  (lib.traceVal(globals.flakeRoot + "/secrets/tailscale/default.yaml"));
+                owner = config.users.users.root.name;
+                reloadUnits = ["tailscale-autoconnect.service"];
+              };
+              # Autoconnect
+              services.tailscale.authKeyFile = config.sops.secrets."${key}".path;
+            })
     ]);
 }
