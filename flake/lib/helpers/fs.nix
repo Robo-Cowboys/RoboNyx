@@ -3,7 +3,6 @@
   self,
   ...
 }: let
-  inherit (lib) fs;
   inherit (self) globals;
 in {
   fs = rec {
@@ -35,7 +34,7 @@ in {
     get-file = path: "${globals.flakeRoot}/${path}";
   };
 
-    getSecretFile = file: fs.get-file "secrets/${file}";
+    getSecretFile = file: "${globals.flakeRoot}/secrets/${file}";
   #  getSSHKeyFiles = user:
   #    fs.get-files (fs.get-file "keys/${user}/ssh");
 }
