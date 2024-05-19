@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}: {
+{config, ...}: {
   config = {
     # enable completions for system packages
     # and other stuff

@@ -8,7 +8,7 @@
 
   sys = config.modules.system;
 in {
-  config = mkIf (sys.security.fprint.enable) {
+  config = mkIf sys.security.fprint.enable {
     # fingerprint login
     # doesn't work because thanks drivers
     services.fprintd = {

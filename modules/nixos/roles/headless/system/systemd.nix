@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}: {
+{config, ...}: {
   config = {
     # https://github.com/numtide/srvos/blob/main/nixos/server/default.nix
     systemd = {

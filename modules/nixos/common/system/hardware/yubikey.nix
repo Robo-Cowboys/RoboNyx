@@ -8,7 +8,7 @@
 
   yubikeySupport = config.modules.system.yubikeySupport;
 in {
-  config = mkIf (yubikeySupport.enable) {
+  config = mkIf yubikeySupport.enable {
     hardware.gpgSmartcards.enable = true;
 
     services = {

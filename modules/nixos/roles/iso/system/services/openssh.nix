@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}: {
+{config, ...}: {
   config = {
     # Hardened SSH configuration
     services.openssh = {

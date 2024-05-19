@@ -3,8 +3,6 @@
   lib,
   ...
 }: let
-  inherit (lib) mkIf;
-
   sys = config.modules.system;
 in {
   # variables that I want to set globally on all systems

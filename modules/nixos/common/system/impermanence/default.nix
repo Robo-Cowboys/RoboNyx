@@ -13,7 +13,7 @@ in {
     inputs.impermanence.nixosModules.impermanence
   ];
 
-  config = mkIf (cfg.enable) {
+  config = mkIf cfg.enable {
     fileSystems."/etc/ssh" = {
       depends = ["/persistent"];
       neededForBoot = true;

@@ -5,7 +5,7 @@
 }: let
   inherit (lib) mkIf;
 in {
-  config = mkIf (config.modules.device.hasSound) {
+  config = mkIf config.modules.device.hasSound {
     sound = {
       enable = true;
       mediaKeys.enable = true;

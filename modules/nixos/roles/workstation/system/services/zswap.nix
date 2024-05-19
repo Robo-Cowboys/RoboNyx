@@ -1,8 +1,4 @@
-{
-  lib,
-  config,
-  ...
-}: {
+{config, ...}: {
   config = {
     # compress memory and store in RAM before swapping to disk
     boot.kernelParams = ["zswap.enabled=1"];

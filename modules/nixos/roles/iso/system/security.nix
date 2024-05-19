@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}: {
+{config, ...}: {
   config = {
     # attempt to fix "too many open files"
     security.pam.loginLimits = [

@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}: {
+{config, ...}: {
   config = {
     # a headless system shoudld not mount any removable media
     # without explicit user action

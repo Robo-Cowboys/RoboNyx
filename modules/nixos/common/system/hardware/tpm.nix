@@ -7,7 +7,7 @@
 
   dev = config.modules.device;
 in {
-  config = mkIf (dev.hasTPM) {
+  config = mkIf dev.hasTPM {
     security.tpm2 = {
       # enable Trusted Platform Module 2 support
       enable = true;

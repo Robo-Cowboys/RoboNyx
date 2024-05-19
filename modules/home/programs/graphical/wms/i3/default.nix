@@ -174,16 +174,10 @@ in {
         ];
 
         assigns = let
-          w1 = "1:  TSK";
           w2 = "2:  MUS";
           w3 = "3:  CHAT";
-          w4 = "4:  VIRT";
-          w5 = "5:  TERM";
-          w6 = "6:  GFX";
           w7 = "7:  WWW";
-          w8 = "8:  TERM";
           w9 = "9:  DEV";
-          w0 = "0:  TERM";
         in {
           "${w2}" = [{class = "Spotify";}];
           "${w3}" = [{class = "Discord";}];

@@ -4,8 +4,6 @@
   lib,
   ...
 }: let
-  inherit (lib.modules) mkIf;
-
   #TODO: Update this so it's pulled from the main system config.
   keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICDSw8KwWzGDDks1fHSiuJO915PDXYdgKHpj+4+6XYrW sincore@jupiter"

@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}: {
+{config, ...}: {
   config = {
     systemd = {
       # TODO: those tend to include sensitie information, maybe we want to disable this?

@@ -2,9 +2,7 @@
   config,
   lib,
   ...
-}: let
-  inherit (lib) mkIf;
-in {
+}: {
   config = {
     # we use networkmanager manage network devices locally
     networking.networkmanager = {

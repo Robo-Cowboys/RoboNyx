@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}: {
+{config, ...}: {
   config = {
     environment = {
       # normally we wouldn't need any Xlibs on a headless server but for whatever reason

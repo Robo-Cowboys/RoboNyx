@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  inherit (lib) mkIf mkForce mkDefault;
+  inherit (lib) mkForce mkDefault;
 in {
   config = {
     security = {

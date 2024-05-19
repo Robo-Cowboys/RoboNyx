@@ -1,8 +1,4 @@
-{
-  lib,
-  config,
-  ...
-}: {
+{config, ...}: {
   config = {
     programs = {
       # allow users to mount fuse filesystems with allow_other

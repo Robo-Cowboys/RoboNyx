@@ -1,5 +1,4 @@
 {
-  self,
   osConfig,
   lib,
   ...

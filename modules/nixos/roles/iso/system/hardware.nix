@@ -1,8 +1,4 @@
-{
-  lib,
-  config,
-  ...
-}: {
+{config, ...}: {
   config = {
     # provide all hardware drivers, including proprietary ones
     hardware = {

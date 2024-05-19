@@ -7,7 +7,7 @@
 
   sys = config.modules.system;
 in {
-  config = mkIf (sys.video.enable) {
+  config = mkIf sys.video.enable {
     xdg.portal.config = {
       common = {
         "org.freedesktop.impl.portal.Secret" = [

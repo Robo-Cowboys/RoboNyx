@@ -1,8 +1,4 @@
-{
-  lib,
-  self,
-  ...
-}: let
+{self, ...}: let
   inherit (self) globals;
 in {
   fs = rec {

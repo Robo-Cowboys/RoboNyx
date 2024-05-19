@@ -1,9 +1,5 @@
 {
-  perSystem = {
-    inputs',
-    pkgs,
-    ...
-  }: let
+  perSystem = {pkgs, ...}: let
     inherit (import ../utils.nix {inherit pkgs;}) mkHook;
   in {
     pre-commit.settings = {

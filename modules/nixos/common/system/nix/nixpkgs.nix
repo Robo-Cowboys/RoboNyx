@@ -1,4 +1,8 @@
-{inputs', pkgs, ...}: {
+{
+  inputs',
+  pkgs,
+  ...
+}: {
   # Global nixpkgs configuration. This is ignored if nixpkgs.pkgs is set
   # which is a case that should be avoided. Everything that is set to configure
   # nixpkgs must go here.
@@ -21,7 +25,10 @@
 
     overlays = [
       #TODO: Yuck.. Must be a better way to do this.
-      (import ./../../../../../packages { inherit inputs'; inherit (pkgs) system; })
+      (import ./../../../../../packages {
+        inherit inputs';
+        inherit (pkgs) system;
+      })
     ];
   };
 }

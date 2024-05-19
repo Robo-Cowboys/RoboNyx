@@ -3,9 +3,7 @@
   config,
   ...
 }:
-with lib; let
-  inherit (lib) mkIf;
-in {
+with lib; {
   imports = [
     ./touchpad.nix
   ];

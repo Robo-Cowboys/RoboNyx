@@ -26,6 +26,6 @@ in {
           pandoc # pandoc plugin uses pandoc to render alternative text formats
         ];
       })
-];
+    ];
   };
 }

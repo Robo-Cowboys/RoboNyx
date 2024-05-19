@@ -6,7 +6,6 @@
   ...
 }: let
   inherit (lib) mkIf;
-  inherit (osConfig) modules;
   inherit (import ./packages {inherit inputs' pkgs;}) grimblast dbus-hyprland-env hyprpicker wrapper hyprshot;
 in {
   imports = [
