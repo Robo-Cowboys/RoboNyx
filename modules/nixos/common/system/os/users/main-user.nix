@@ -1,7 +1,6 @@
 {
   pkgs,
   config,
-  lib,
   ...
 }: let
   #TODO: Update this so it's pulled from the main system config.

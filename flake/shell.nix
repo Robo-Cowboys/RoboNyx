@@ -1,7 +1,4 @@
-{
-  inputs,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
     inputs.treefmt-nix.flakeModule
     inputs.just-flake.flakeModule
@@ -15,7 +12,6 @@
   }: {
     just-flake.features = {
       treefmt.enable = true;
-      convco.enable = true;
     };
 
     # Add your auto-formatters here.
@@ -46,7 +42,6 @@
         excludes = ["flake.lock" "r'.+\.age$'" "r'.+\.sh$'"];
         hooks = {
           treefmt.enable = true;
-          convco.enable = true;
         };
       };
     };
@@ -58,7 +53,6 @@
         config.pre-commit.devShell
       ];
       packages = [
-        config.pre-commit.settings.tools.convco
       ];
     };
   };
