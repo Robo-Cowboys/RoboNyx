@@ -29,7 +29,7 @@ in {
       ];
       timeouts = [
         {
-          timeout = 60;
+          timeout = 300;
           command = "${getExe pkgs.swaylock-effects} -fF";
           #          resumeCommand = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl dispatch dpms on";
         }

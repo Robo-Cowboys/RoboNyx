@@ -45,7 +45,7 @@
         screenshots = "$HOME/Media/Pictures/Screenshots";
         notes = "$HOME/Cloud/Notes";
         source = "$HOME/source";
-        dots = "$HOME/.config/nyx";
+        dots = "$HOME/.config/dots";
       };
     };
 
