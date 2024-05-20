@@ -8,22 +8,22 @@
   inherit (self) globals;
 in {
   imports = [
-    #    # configuration options for nixos activation scripts
+    # configuration options for nixos activation scripts
     ./activation.nix
-    #
-    #    # boot/impermanence mounts
+
+    # boot/impermanence mounts
     ./boot.nix
     ./impermanence.nix
-    #
-    #    # network and overall hardening
+
+    # network and overall hardening
     #    ./networking
     ./security.nix
     ./encryption.nix
-    #
-    #    # emulation and virtualization
+
+    # emulation and virtualization
     #    ./emulation.nix
     ./virtualization.nix
-    #
+
     # package and program related options
     ./services
     ./programs

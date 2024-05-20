@@ -8,7 +8,7 @@
 
   env = config.modules.usrEnv;
 in {
-  options.modules.meta = {
+  options.meta = {
     hostname = mkOption {
       type = types.str;
       default = config.networking.hostName;
