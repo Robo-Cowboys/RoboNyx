@@ -11,7 +11,6 @@
       dotDir = ".config/zsh";
       enableCompletion = true;
       autosuggestion.enable = true;
-
       syntaxHighlighting.enable = true;
       sessionVariables = {LC_ALL = "en_US.UTF-8";};
 
@@ -47,11 +46,13 @@
         source = "$HOME/source";
         dots = "$HOME/.config/dots";
       };
-    };
 
-    programs.zoxide = {
-      enable = true;
-      enableZshIntegration = true;
+      # Disable /etc/{zshrc,zprofile} that contains the "sane-default" setup out of the box
+      # in order avoid issues with incorrect precedence to our own zshrc.
+      # See `/etc/zshrc` for more info.
+      envExtra = ''
+        setopt no_global_rcs
+      '';
     };
   };
 }

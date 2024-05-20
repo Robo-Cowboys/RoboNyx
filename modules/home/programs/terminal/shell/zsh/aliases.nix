@@ -102,8 +102,8 @@ in {
     jc = "sudo journalctl";
     scu = "systemctl --user ";
     jcu = "journalctl --user";
-    #    la = "${getExe eza} -lah --tree";
-    #    tree = "${getExe eza} --tree --icons=always";
+    la = "${getExe eza} -lah --tree";
+    tree = "${getExe eza} --tree --icons=always";
     #    http = "${getExe python3} -m http.server";
     #    burn = "pkill -9";
     #    diff = "diff --color=auto";
