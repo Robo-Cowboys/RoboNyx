@@ -1,12 +1,11 @@
 {
   lib,
+  pkgs,
   config,
   osConfig,
   ...
 }: let
-  inherit (builtins) readFile;
   inherit (lib.strings) fileContents;
-  inherit (osConfig.modules.style.colorScheme) colors;
 in {
   programs.zsh = {
     completionInit = ''

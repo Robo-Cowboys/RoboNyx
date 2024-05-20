@@ -35,7 +35,7 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 ZSH_AUTOSUGGEST_HISTORY_IGNORE=$'*\n*'
 
 # Improve paste delay for nix store paths
-FAST_HIGHLIGHT[use_async]=1
+#FAST_HIGHLIGHT[use_async]=1
 
 # open commands in $EDITOR
 autoload -z edit-command-line
