@@ -22,7 +22,7 @@ in {
       settings = {
         global = {
           follow = "mouse";
-          width = 320;
+          width = 400;
           height = 280;
           origin = "top-center";
           alignment = "left";
