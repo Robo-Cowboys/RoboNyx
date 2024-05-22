@@ -1,5 +1,6 @@
 {
   imports = [
+    ./docs
     ./secrets
     ./system
   ];

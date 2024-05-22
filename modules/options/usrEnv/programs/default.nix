@@ -1,4 +1,4 @@
-_: {
+{
   imports = [
     ./launchers.nix
     ./lockers.nix

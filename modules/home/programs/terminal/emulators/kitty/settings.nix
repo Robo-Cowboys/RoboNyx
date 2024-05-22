@@ -2,7 +2,7 @@
   # General
   background_opacity = "0.85";
   font_family = "monospace";
-  font_size = 14;
+  font_size = 12;
   disable_ligatures = "never";
   cursor_shape = "underline";
   cursor_blink_interval = "0.5";

@@ -5,6 +5,7 @@
       justfile = ''
         # Rebuild the system using `nh os boot`
         boot:
+          nix flake update robo-nyx
           nh os boot
       '';
     };

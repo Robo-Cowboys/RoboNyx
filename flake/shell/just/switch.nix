@@ -4,7 +4,8 @@
       enable = true;
       justfile = ''
         # Rebuild the system using `nh os switch`
-        sw:
+        switch:
+          nix flake update robo-nyx
           nh os switch
       '';
     };

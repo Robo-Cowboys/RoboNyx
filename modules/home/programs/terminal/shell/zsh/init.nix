@@ -1,72 +1,78 @@
 {
   lib,
+  pkgs,
+  config,
   osConfig,
   ...
 }: let
-  inherit (builtins) readFile;
   inherit (lib.strings) fileContents;
-  inherit (osConfig.modules.style.colorScheme) colors;
 in {
-  config = {
-    programs.zsh = {
-      completionInit = ''
-          ${readFile ./rc/comp.zsh}
-          ${readFile ./rc/fzf.zsh}
+  programs.zsh = {
+    completionInit = ''
+      # Load compinit
+      autoload -U compinit
+      zmodload zsh/complist
 
-          # configure fzf tab options
-          export FZF_DEFAULT_OPTS="
-           --color gutter:-1
-            --color bg:-1
-            --color bg+:-1
-            --color fg:${colors.base05}
-            --color fg+:${colors.base06}
-            --color hl:${colors.base0D}
-            --color hl+:${colors.base0D}
-            --color header:${colors.base0D}
-            --color info:${colors.base0A}
-            --color marker:${colors.base0C}
-            --color pointer:${colors.base0C}
-            --color prompt:${colors.base0A}
-            --color spinner:${colors.base0C}
-            --color preview-bg:${colors.base01}
-            --color preview-fg:${colors.base0D}
-            --prompt ' '
-            --pointer ''
-            --layout=reverse
-            -m --bind ctrl-space:toggle,pgup:preview-up,pgdn:preview-down
-        "
-      '';
+      _comp_options+=(globdots)
+      zcompdump="$XDG_DATA_HOME"/zsh/.zcompdump-"$ZSH_VERSION"-"$(date --iso-8601=date)"
+      compinit -d "$zcompdump"
 
-      initExtra = ''
-        # avoid duplicated entries in PATH
-        typeset -U PATH
+      # Recompile zcompdump if it exists and is newer than zcompdump.zwc
+      # compdumps are marked with the current date in yyyy-mm-dd format
+      # which means this is likely to recompile daily
+      # also see: <https://htr3n.github.io/2018/07/faster-zsh/>
+      if [[ -s "$zcompdump" && (! -s "$zcompdump".zwc || "$zcompdump" -nt "$zcompdump".zwc) ]]; then
+        zcompile "$zcompdump"
+      fi
 
-        # try to correct the spelling of commands
-        setopt correct
-        # disable C-S/C-Q
-        setopt noflowcontrol
-        # disable "no matches found" check
-        unsetopt nomatch
+      # Load bash completion functions.
+      autoload -U +X bashcompinit && bashcompinit
 
-        # my helper functions for setting zsh options that I normally use on my shell
-        # a description of each option can be found in the Zsh manual
-        # <https://zsh.sourceforge.io/Doc/Release/Options.html>
-        # NOTE: this slows down shell startup time considerably
-        ${fileContents ./rc/unset.zsh}
-        ${fileContents ./rc/set.zsh}
+      ${fileContents ./rc/comp.zsh}
+    '';
 
-        # zsh modules and everything else
-        ${fileContents ./rc/modules.zsh}
-        ${fileContents ./rc/misc.zsh}
-      '';
+    initExtra = ''
+      # avoid duplicated entries in PATH
+      typeset -U PATH
 
-      initExtraFirst = ''
-        # Do this early so fast-syntax-highlighting can wrap and override this
-        if autoload history-search-end; then
-          zle -N history-beginning-search-backward-end history-search-end
-          zle -N history-beginning-search-forward-end  history-search-end
-        fi
-      '';
-    };
+      # try to correct the spelling of commands
+      setopt correct
+      # disable C-S/C-Q
+      setopt noflowcontrol
+      # disable "no matches found" check
+      unsetopt nomatch
+
+      # autosuggests otherwise breaks these widgets.
+      # <https://github.com/zsh-users/zsh-autosuggestions/issues/619>
+      ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(history-beginning-search-backward-end history-beginning-search-forward-end)
+
+      # Do this early so fast-syntax-highlighting can wrap and override this
+      if autoload history-search-end; then
+        zle -N history-beginning-search-backward-end history-search-end
+        zle -N history-beginning-search-forward-end  history-search-end
+      fi
+
+      source <(${lib.getExe pkgs.fzf} --zsh)
+      source ${config.programs.git.package}/share/git/contrib/completion/git-prompt.sh
+    '';
+
+    initExtraFirst = ''
+      # my helper functions for setting zsh options that I normally use on my shell
+      # a description of each option can be found in the Zsh manual
+      # <https://zsh.sourceforge.io/Doc/Release/Options.html>
+      # NOTE: this slows down shell startup time considerably
+      ${fileContents ./rc/unset.zsh}
+      ${fileContents ./rc/set.zsh}
+
+      # binds, zsh modules and everything else
+      ${fileContents ./rc/modules.zsh}
+      ${fileContents ./rc/fzf-tab.zsh}
+      ${fileContents ./rc/misc.zsh}
+
+      # Set LS_COLORS by parsing dircolors output
+      LS_COLORS="$(${pkgs.coreutils}/bin/dircolors --sh)"
+      LS_COLORS="''${''${LS_COLORS#*\'}%\'*}"
+      export LS_COLORS
+    '';
   };
 }
