@@ -29,6 +29,8 @@ in {
           {WLR_NO_HARDWARE_CURSORS = "1";}
 #        })
       ];
+
+      #TODO: Pete do you need any of these.
       systemPackages = with pkgs; [
         #        nvtopPackages.nvidia
         #
@@ -50,7 +52,6 @@ in {
     hardware = {
       nvidia = {
         prime = {
-          #TODO: @PETE Check This
           offload = {
             enable = lib.mkOverride 990 true;
             enableOffloadCmd = lib.mkIf config.hardware.nvidia.prime.offload.enable true; # Provides `nvidia-offload` command.
