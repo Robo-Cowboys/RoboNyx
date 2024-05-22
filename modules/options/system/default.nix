@@ -50,6 +50,19 @@ in {
   };
 
   options.modules.system = {
+
+    flakeDirectory = mkOption {
+      type = types.enum config.modules.system.users;
+      default = "/home/${config.modules.system.users}/.config/dots";
+      description = ''
+        The directory used for the Nix flakes of the system.
+
+        Ensure that this directory is properly set to avoid issues with Nix flake management and operations. If not set correctly, you may encounter errors when attempting to use Nix flakes or during system operations that depend on them.
+
+        Consider setting {option}`config.modules.system.flakeDirectory` in your configuration to ensure proper flake management.
+      '';
+    };
+
     mainUser = mkOption {
       type = types.enum config.modules.system.users;
       default = builtins.elemAt config.modules.system.users 0;

@@ -4,7 +4,7 @@ in {
   # variables that I want to set globally on all systems
   config = {
     environment.variables = {
-      FLAKE = "/home/${sys.mainUser}/.config/dots";
+      FLAKE = sys.flakeDirectory;
       SSH_AUTH_SOCK = "/run/user/\${UID}/keyring/ssh";
 
       # editors
