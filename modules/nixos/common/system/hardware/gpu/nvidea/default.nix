@@ -25,9 +25,9 @@ in {
       sessionVariables = mkMerge [
         {LIBVA_DRIVER_NAME = "nvidia";}
 
-        (mkIf env.isWayland {
-          WLR_NO_HARDWARE_CURSORS = "1";
-        })
+#        (mkIf env.isWayland {
+          {WLR_NO_HARDWARE_CURSORS = "1";}
+#        })
       ];
       systemPackages = with pkgs; [
         #        nvtopPackages.nvidia
