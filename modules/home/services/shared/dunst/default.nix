@@ -22,7 +22,7 @@ in {
       settings = {
         global = {
           follow = "mouse";
-          width = 320;
+          width = 400;
           height = 280;
           origin = "top-center";
           alignment = "left";
@@ -53,7 +53,7 @@ in {
           history_length = 20;
           show_age_threshold = 60;
           markup = "full";
-          font = "Iosevka 16";
+          font = "Iosevka 14";
           word_wrap = "yes";
           sort = "yes";
           shrink = "no";
