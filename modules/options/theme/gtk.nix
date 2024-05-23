@@ -1,9 +1,12 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }: let
   inherit (lib) mkOption mkEnableOption types;
+
+    sty = config.modules.style;
 in {
   options = {
     modules = {
@@ -60,7 +63,7 @@ in {
             size = mkOption {
               type = types.int;
               description = "The size of the font";
-              default = 12;
+              default = sty.fonts.sizes.applications;
             };
           };
         };

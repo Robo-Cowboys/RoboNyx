@@ -1,8 +1,8 @@
-{colors, ...}: {
+{colors, fonts, ...}: {
   # General
   background_opacity = "0.85";
   font_family = "monospace";
-  font_size = 12;
+  font_size = fonts.sizes.terminal;
   disable_ligatures = "never";
   cursor_shape = "underline";
   cursor_blink_interval = "0.5";

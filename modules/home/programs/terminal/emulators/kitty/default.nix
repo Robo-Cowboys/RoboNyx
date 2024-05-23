@@ -6,6 +6,7 @@
   inherit (lib) mkIf;
   inherit (osConfig) modules;
   inherit (modules.style.colorScheme) colors;
+  inherit (modules.style) fonts;
 
   dev = modules.device;
   acceptedTypes = ["laptop" "desktop" "hybrid"];
@@ -14,7 +15,7 @@ in {
     programs.kitty = {
       enable = true;
 
-      settings = import ./settings.nix {inherit colors;};
+      settings = import ./settings.nix {inherit colors fonts;};
 
       keybindings = {
         ## Tabs

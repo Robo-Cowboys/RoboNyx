@@ -1,14 +1,18 @@
 {
   pkgs,
+  config,
   lib,
   ...
 }: let
   inherit (lib) mkOption mkEnableOption types;
+
+  sty = config.modules.style;
 in {
   imports = [
     ./gtk.nix
     ./qt.nix
     ./colors.nix
+    ./fonts.nix
   ];
 
   options.modules.style = {

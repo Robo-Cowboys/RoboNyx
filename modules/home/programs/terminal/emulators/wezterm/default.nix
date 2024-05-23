@@ -7,6 +7,7 @@
   inherit (lib) mkIf;
   inherit (osConfig) modules;
   inherit (modules.style.colorScheme) colors;
+  inherit (modules.style) fonts;
 
   dev = modules.device;
   acceptedTypes = ["laptop" "desktop" "hybrid"];
@@ -53,7 +54,7 @@ in {
          show_tab_index_in_tab_bar = false,
 
          -- font config
-         font_size = 14.0,
+         font_size = ${builtins.toString fonts.sizes.terminal},
          font = wezterm.font_with_fallback {
           { family = "Iosevka Nerd Font", weight = "Regular" },
           { family = "Symbols Nerd Font", weight = "Regular" }

@@ -7,6 +7,7 @@
   inherit (lib) mkIf;
   inherit (osConfig) modules;
   inherit (modules.style.colorScheme) colors;
+  inherit (modules.style) fonts;
 
   dev = modules.device;
   acceptedTypes = ["desktop" "laptop" "lite" "hybrid"];
@@ -53,7 +54,7 @@ in {
           history_length = 20;
           show_age_threshold = 60;
           markup = "full";
-          font = "Iosevka 14";
+          font = "Iosevka ${builtins.toString fonts.sizes.popups}";
           word_wrap = "yes";
           sort = "yes";
           shrink = "no";
