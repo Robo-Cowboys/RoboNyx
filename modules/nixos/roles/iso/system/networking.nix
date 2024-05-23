@@ -1,4 +1,5 @@
 {
+  self',
   lib,
   config,
   ...
@@ -16,8 +17,8 @@ in {
     # Enable SSH in the boot process.
     systemd.services.sshd.wantedBy = mkForce ["multi-user.target"];
     users.users.root.openssh.authorizedKeys.keys = [
-      #TODO: What??
-      #    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHRDg2lu1rXKP4OfyghP17ZVL2csnyJEJcy9Km3LQm4r notashelf@enyo"
+      #add in the main user SSH key
+      self'.keys.main
     ];
   };
 }
