@@ -52,8 +52,8 @@ in {
   options.modules.system = {
 
     flakeDirectory = mkOption {
-      type = types.enum config.modules.system.users;
-      default = "/home/${config.modules.system.users}/.config/dots";
+      type = with types; str;
+      default = "/home/${config.modules.system.mainUser}/.config/dots";
       description = ''
         The directory used for the Nix flakes of the system.
 
