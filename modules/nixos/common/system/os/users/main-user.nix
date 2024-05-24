@@ -1,11 +1,11 @@
 {
-  self',
+  self,
   pkgs,
   config,
   ...
 }: let
   keys = [
-    self'.keys.main
+    self.keys.main
   ];
   sys = config.modules.system;
 in {
