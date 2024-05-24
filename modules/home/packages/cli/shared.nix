@@ -30,6 +30,7 @@ in {
       skim
       p7zip
       btop
+      caligula # user-friendly, lightweight TUI for imaging disks.
     ];
   };
 }
