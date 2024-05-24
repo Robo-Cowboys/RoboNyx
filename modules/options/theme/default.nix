@@ -1,6 +1,5 @@
 {
   pkgs,
-  config,
   lib,
   ...
 }: let
@@ -37,10 +36,10 @@ in {
       };
     };
 
-    wallpapers = mkOption {
-      type = with types; either str (listOf str);
-      description = "Wallpaper or wallpapers to use";
-      default = [];
+    wallpaper = mkOption {
+      type = with types; str;
+      description = "Wallpaper to use relative to the wallpackages repo";
+      default = "catppuccin/01.png";
     };
   };
 }
