@@ -20,7 +20,7 @@ in {
         Service = let
           wall = "${wallpkgs.catppuccin}/share/wallpapers/${style.wallpaper}";
         in {
-          ExecStart = "${getExe pkgs.swaybg} -i ${wall} -m center";
+          ExecStart = "${getExe pkgs.swaybg} -i ${wall} -m fill";
           Restart = "always";
         };
       };
