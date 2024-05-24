@@ -36,47 +36,8 @@ in {
       "L /var/lib/NetworkManager/timestamps - - - - /persistent/var/lib/NetworkManager/timestamps"
     ];
 
+    #This is neeeded for home manager impermanence
     programs.fuse.userAllowOther = true;
-    environment.persistence."/persistent" = {
-      users."${sys.mainUser}" = {
-        directories =
-          [
-            "Downloads"
-            "Music"
-            "Games"
-            "Pictures"
-            "Documents"
-            "Videos"
-            "source"
-            {
-              directory = ".gnupg";
-              mode = "0700";
-            }
-            {
-              directory = ".ssh";
-              mode = "0700";
-            }
-            {
-              directory = ".keepass";
-              mode = "0700";
-            }
-            {
-              directory = ".local/share/keyrings";
-              mode = "0700";
-            }
-            ".var/app"
-          ]
-          #TODO This should be centrilized as well.
-          ++ forEach ["google-chrome" "orca-slicer" "flatpak"] (x: ".cache/${x}")
-          ++ forEach ["direnv" "flatpak"] (x: ".local/share/${x}")
-          ++ forEach ["nyx" "NordPass" "Signal" "OrcaSlicer" "JetBrains" "google-chrome" "sops"] (x: ".config/${x}");
-        files = [
-          #                ".screenrc"
-          #                ".config/spotify/prefs"
-          #                ".config/spotify/Users/fuzen-py/prefs"
-        ];
-      };
-    };
 
     boot.initrd.systemd.services.rollback = {
       description = "Rollback BTRFS root subvolume to a pristine state";
