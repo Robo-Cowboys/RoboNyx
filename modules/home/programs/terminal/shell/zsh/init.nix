@@ -2,7 +2,6 @@
   lib,
   pkgs,
   config,
-  osConfig,
   ...
 }: let
   inherit (lib.strings) fileContents;

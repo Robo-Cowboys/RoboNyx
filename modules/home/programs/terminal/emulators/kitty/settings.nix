@@ -1,4 +1,8 @@
-{colors, fonts, ...}: {
+{
+  colors,
+  fonts,
+  ...
+}: {
   # General
   background_opacity = "0.85";
   font_family = "monospace";

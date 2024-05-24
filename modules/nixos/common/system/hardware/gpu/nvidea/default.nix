@@ -9,7 +9,6 @@
   # use the latest possible nvidia package
 
   dev = config.modules.device;
-  env = config.modules.usrEnv;
 in {
   config = mkIf (builtins.elem dev.gpu.type ["nvidia" "hybrid-nv"]) {
     # nvidia drivers are unfree software
@@ -25,9 +24,9 @@ in {
       sessionVariables = mkMerge [
         {LIBVA_DRIVER_NAME = "nvidia";}
 
-#        (mkIf env.isWayland {
-          {WLR_NO_HARDWARE_CURSORS = "1";}
-#        })
+        #        (mkIf env.isWayland {
+        {WLR_NO_HARDWARE_CURSORS = "1";}
+        #        })
       ];
 
       #TODO: Pete do you need any of these.

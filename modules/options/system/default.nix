@@ -50,7 +50,6 @@ in {
   };
 
   options.modules.system = {
-
     flakeDirectory = mkOption {
       type = with types; str;
       default = "/home/${config.modules.system.mainUser}/.config/dots";

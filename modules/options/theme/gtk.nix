@@ -6,7 +6,7 @@
 }: let
   inherit (lib) mkOption mkEnableOption types;
 
-    sty = config.modules.style;
+  sty = config.modules.style;
 in {
   options = {
     modules = {

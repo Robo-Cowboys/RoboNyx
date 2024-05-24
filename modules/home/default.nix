@@ -12,6 +12,9 @@ in {
     #TODO: reenable this.
     #    self.homeManagerModules.gtklock # a home-manager module for gtklock, gotta upstream it eventually
 
+    # home impermanence
+    ./impermanence
+
     # home package sets
     ./packages
 

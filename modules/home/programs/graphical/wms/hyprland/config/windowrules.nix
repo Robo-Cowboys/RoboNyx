@@ -53,7 +53,6 @@
 
         #! Disable window flicker when autocomplete or tooltips appear
         "nofocus,class:^(jetbrains-.*)$,title:^(win.*)$,floating:1"
-
       ];
     };
   };

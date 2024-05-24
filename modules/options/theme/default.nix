@@ -5,8 +5,6 @@
   ...
 }: let
   inherit (lib) mkOption mkEnableOption types;
-
-  sty = config.modules.style;
 in {
   imports = [
     ./gtk.nix
