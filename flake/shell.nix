@@ -8,6 +8,7 @@
     ./shell/just/boot.nix
     ./shell/just/iso.nix
     ./shell/just/build.nix
+    ./shell/just/test.nix
     ./shell/just/tree-fmt.nix #tree fmt command
   ];
 
